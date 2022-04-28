@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-    skip_before_action :authorize, only: [:index]
+    #skip_before_action :authorize, only: [:index]
 
     def index
         render json: Room.all, status: :ok
@@ -7,17 +7,19 @@ class RoomsController < ApplicationController
     end
 
     def show
-        render json: find_room
+        render json: find_room, include: %w[posts posts.replies]
     end
 
     def create
+        
         room = Room.create!(room_params)
-        room_member = 
-                        RoomMember.create!(
+        room_member = RoomMember.create!(
+            
                             user_id: params[:user_id],
                             room_id: room.id,
                             is_admin: true,
                         )
+                        
         render json: room, status: :created
     end
 
@@ -40,7 +42,7 @@ class RoomsController < ApplicationController
     private
     
     def find_room
-        Board.find(params[:id])
+        Room.find(params[:id])
     end
 
     def room_params
