@@ -32,7 +32,7 @@ class PostsController < ApplicationController
     end
 
     def post_params
-        params.permit(:room_member, :channel_id)
+        params.permit(:room_member_id, :channel_id,  :content)
     end
 
 end
