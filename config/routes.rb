@@ -10,4 +10,14 @@ Rails.application.routes.draw do
   resources :replies
   resources :posts
   resources :channels
+
+  post '/signup', to: 'users#create'
+	post '/login', to: 'sessions#create'
+	delete '/logout', to: 'sessions#destroy'
+  get '/sessions/:user_id', to: 'sessions#show'
+	get '/autologin', to: 'users#show'
+
+  get '*path',
+	    to: 'fallback#index',
+	    constraints: ->(req) { !req.xhr? && req.format.html? }
 end
