@@ -20,7 +20,7 @@ class RepliesController < ApplicationController
     end
 
     def destroy
-        task = find_task
+        task = find_reply
         task.destroy
         head :no_content
     end
@@ -32,7 +32,7 @@ class RepliesController < ApplicationController
     end
 
     def reply_params
-        params.permit(:room_member_id, :post_id)
+        params.permit(:room_member_id, :post_id, :content)
     end
 
 end

@@ -21,7 +21,7 @@ rm2 = RoomMember.create(user_id: 2, room_id: 1, is_admin: false)
 rm3 = RoomMember.create(user_id: 2, room_id: 2, is_admin: true)
 rm4 = RoomMember.create(user_id: 1, room_id: 2, is_admin: false)
 rm5 = RoomMember.create(user_id: 1, room_id: 3, is_admin: true)
-rm6 = RoomMember.create(user_id: 2, room_id: 4, is_admin: true)
+rm6 = RoomMember.create(user_id: 1, room_id: 4, is_admin: true)
 
 c1 = Channel.create(name: 'channel 1', room_id: 1)
 c2 = Channel.create(name: 'channel 2', room_id: 1)

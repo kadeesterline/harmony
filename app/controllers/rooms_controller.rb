@@ -7,7 +7,7 @@ class RoomsController < ApplicationController
     end
 
     def show
-        render json: find_room, include: %w[posts posts.replies]
+        render json: find_room, include: %w[channels channels.posts channels.posts.replies], serializer: RoomSerializer
     end
 
     def create
