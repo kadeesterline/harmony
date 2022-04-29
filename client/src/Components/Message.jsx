@@ -3,13 +3,15 @@ import { useMember } from "../Context/MemberContext";
 import { useChannel } from "../Context/ChannelContext";
 import { useState } from "react";
 import Reply from "./Reply";
+import EditMessageForm from "./EditMessageForm";
 
-function Message({ message }) {
+function Message({ message, setChannelMessages }) {
   const [showReply, setShowReply] = useState(false);
   const [replyInput, setReplyInput] = useState({
     content: "",
   });
   const [showThread, setShowThread] = useState(false);
+  const [showEditMessage, setShowEditMessage] = useState(false);
   const currentMember = useMember();
   const currentChannel = useChannel();
 
@@ -22,7 +24,11 @@ function Message({ message }) {
       },
     }).then((r) => {
       if (r.ok) {
-        console.log(r);
+        fetch(`/channels/${currentChannel?.id}`).then((r) => {
+          if (r.ok) {
+            r.json().then(setChannelMessages);
+          }
+        });
       }
     });
   }
@@ -33,6 +39,10 @@ function Message({ message }) {
 
   function toggleShowThread() {
     setShowThread(!showThread);
+  }
+
+  function toggleShowEditMessage() {
+    setShowEditMessage(!showEditMessage);
   }
 
   function handleNewReply(e) {
@@ -51,7 +61,11 @@ function Message({ message }) {
       }),
     }).then((r) => {
       if (r.ok) {
-        console.log(r);
+        fetch(`/channels/${currentChannel?.id}`).then((r) => {
+          if (r.ok) {
+            r.json().then(setChannelMessages);
+          }
+        });
       }
     });
   }
@@ -62,7 +76,11 @@ function Message({ message }) {
   }
 
   const replies = message?.replies?.map((reply) => (
-    <Reply key={reply.id + reply.content} reply={reply} />
+    <Reply
+      key={reply.id + reply.content}
+      reply={reply}
+      setChannelMessages={setChannelMessages}
+    />
   ));
 
   return (
@@ -70,13 +88,26 @@ function Message({ message }) {
       {message.content}
       {showThread ? replies : null}
       {currentMember.id === message.room_member_id ? (
-        <button
-          className=" m-2 w-10 h-10 float-right rounded-full bg-green-1050"
-          onClick={handleDeleteMessage}
-        >
-          {" "}
-          Delete Message{" "}
-        </button>
+        <div>
+          <button
+            className=" m-2 w-10 h-10 float-right rounded-full bg-green-1050"
+            onClick={toggleShowEditMessage}
+          >
+            {showEditMessage ? "Hide" : "Edit Message"}
+          </button>
+          <EditMessageForm
+            showEditMessage={showEditMessage}
+            message={message}
+            setChannelMessages={setChannelMessages}
+          />
+          <button
+            className=" m-2 w-10 h-10 float-right rounded-full bg-green-1050"
+            onClick={handleDeleteMessage}
+          >
+            {" "}
+            Delete Message{" "}
+          </button>
+        </div>
       ) : null}
       <button
         className=" m-2  w-10 h-10 float-right rounded-full bg-green-1050"

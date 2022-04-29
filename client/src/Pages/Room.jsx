@@ -10,14 +10,20 @@ function Room() {
   const handleSetChannel = useChannelUpdate();
   const currentChannel = useChannel();
   const currentMember = useMember();
+  const setCurrentUser = useUserUpdate();
 
   const [chatInput, setChatInput] = useState({
     content: "",
+    picture: {},
   });
 
   const [channelMessages, setChannelMessages] = useState({});
 
   let { id } = useParams();
+
+  function handleSetUser(user) {
+    setCurrentUser(user);
+  }
 
   useEffect(() => {
     console.log(currentChannel.id);
@@ -34,7 +40,7 @@ function Room() {
 
   function handleAddPost(e) {
     e.preventDefault();
-
+    console.log(chatInput);
     fetch("/posts", {
       method: "POST",
       headers: {
@@ -42,26 +48,45 @@ function Room() {
       },
       body: JSON.stringify({
         content: chatInput.content,
+        picture: chatInput.image,
         channel_id: currentChannel?.id,
         room_member_id: currentMember?.id,
       }),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((newMessage) => {
-          setChannelMessages([...channelMessages, newMessage]);
+        fetch(`/channels/${currentChannel?.id}`).then((r) => {
+          if (r.ok) {
+            r.json().then(setChannelMessages);
+          }
         });
-        console.log("channelMessages:", channelMessages);
       }
     });
   }
 
   const channelPosts = channelMessages?.posts?.map((post) => (
-    <Message key={post.id + post.content} message={post} />
+    <Message
+      key={post.id + post.content}
+      message={post}
+      setChannelMessages={setChannelMessages}
+    />
   ));
 
+  // function handleChange(e) {
+  //   const { name, value } = e.target;
+  //   setChatInput((input) => ({ ...input, [name]: value }));
+  // }
+
   function handleChange(e) {
-    const { name, value } = e.target;
-    setChatInput((input) => ({ ...input, [name]: value }));
+    if (e.target.name === "image") {
+      setChatInput((input) => ({
+        ...input,
+        [e.target.name]: e.target.files[0],
+      }));
+    } else {
+      setChatInput({
+        [e.target.name]: e.target.value,
+      });
+    }
   }
 
   return (
@@ -70,7 +95,7 @@ function Room() {
         <div>{channelPosts}</div>
       </div>
 
-      <div className=" w-96 h-20 bottom-0  fixed bg-green-1000  ">
+      <div className=" w-96 h-20 bottom-40  fixed bg-green-1000  ">
         <form onSubmit={handleAddPost}>
           <input
             autoComplete="nope"
@@ -79,6 +104,13 @@ function Room() {
             value={chatInput.content}
             onChange={(e) => handleChange(e)}
             className="border-2 w-full m-5 rounded-lg  h-11"
+          ></input>
+
+          <input
+            type="file"
+            name="image"
+            onChange={(e) => handleChange(e)}
+            className="border-2 w-full m-5 float-right left-80 rounded-lg h-11"
           ></input>
         </form>
       </div>
