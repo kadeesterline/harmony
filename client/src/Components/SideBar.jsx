@@ -6,9 +6,11 @@ import { useMember, useMemberUpdate } from "../Context/MemberContext";
 import RoomButton from "./RoomButton";
 import AddChannelForm from "./AddChannelForm";
 import ChannelButton from "./ChannelButton";
+import EditRoomForm from "./EditRoomForm";
 
 function SideBar() {
   let [showAddChannel, setShowAddChannel] = useState(false);
+  let [showEditRoom, setShowEditRoom] = useState(false);
   let [currentRoom, setCurrentRoom] = useState([]);
 
   let navigate = useNavigate();
@@ -22,9 +24,9 @@ function SideBar() {
 
   useEffect(() => {
     setCurrentRoom(
-      currentUser?.rooms?.filter((room) => room?.id !== parseInt(id))
+      currentUser?.rooms?.filter((room) => room?.id === parseInt(id))
     );
-  }, [currentUser]);
+  }, [currentUser, id]);
 
   const roomButtons =
     currentUser?.rooms?.length > 0 &&
@@ -49,13 +51,14 @@ function SideBar() {
       <ChannelButton key={channel.id + channel.name} channel={channel} />
     ))
   );
-  // function findRoom(currentUser) {
-  //   currentUser?.rooms?.filter((room) => room.id == id);
-  // }
 
   function handleShowAddChannel() {
     console.log("Current room:", currentRoom);
     setShowAddChannel(!showAddChannel);
+  }
+
+  function toggleShowEditRoom() {
+    setShowEditRoom(!showEditRoom);
   }
 
   function handleDeleteRoom(event) {
@@ -68,8 +71,13 @@ function SideBar() {
       },
     }).then((r) => {
       if (r.ok) {
-        console.log(currentUser.rooms);
-        handleSetUser(currentUser?.rooms?.filter((room) => room?.id !== id));
+        fetch("/autologin").then((r) => {
+          if (r.ok) {
+            r.json().then((user) => {
+              handleSetUser(user);
+            });
+          }
+        });
       }
     });
   }
@@ -93,10 +101,18 @@ function SideBar() {
 
       <div>{channelList}</div>
 
-      <button className="absolute bottom-32 left-20 bg-green-1050 p-2 m-2 rounded-full">
-        {" "}
-        Rename Room{" "}
-      </button>
+      {currentMember.is_admin ? (
+        <div>
+          <button
+            className="absolute bottom-32 left-20 bg-green-1050 p-2 m-2 rounded-full"
+            onClick={toggleShowEditRoom}
+          >
+            {" "}
+            Rename Room{" "}
+          </button>
+          <EditRoomForm showEditRoom={showEditRoom} />
+        </div>
+      ) : null}
 
       <button
         onClick={handleShowAddChannel}

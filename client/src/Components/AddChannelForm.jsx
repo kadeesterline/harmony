@@ -1,14 +1,20 @@
 import React from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import { useUserUpdate } from "../Context/UserContext";
 
 function AddChannelForm() {
   let { id } = useParams();
+  const setCurrentUser = useUserUpdate();
 
   const [channelFormInput, setChannelFormInput] = useState({
     name: "",
     room_id: parseInt(id),
   });
+
+  function handleSetUser(user) {
+    setCurrentUser(user);
+  }
 
   function handleAddChannel(e) {
     e.preventDefault();
@@ -21,7 +27,13 @@ function AddChannelForm() {
       body: JSON.stringify(channelFormInput),
     }).then((r) => {
       if (r.ok) {
-        r.json();
+        fetch("/autologin").then((r) => {
+          if (r.ok) {
+            r.json().then((user) => {
+              handleSetUser(user);
+            });
+          }
+        });
       }
     });
   }

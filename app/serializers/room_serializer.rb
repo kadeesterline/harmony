@@ -4,7 +4,7 @@ class RoomSerializer < ActiveModel::Serializer
     
     has_many :room_members
     has_many :channels
-    has_many :posts, through: :channels
+    # has_many :posts, through: :channels
     
     def channels
         object.channels.map { |c| c}

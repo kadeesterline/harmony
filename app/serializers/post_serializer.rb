@@ -4,4 +4,5 @@ class PostSerializer < ActiveModel::Serializer
     belongs_to :channel
     belongs_to :room_member
     has_many :replies
+    
 end

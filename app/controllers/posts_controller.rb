@@ -10,6 +10,7 @@ class PostsController < ApplicationController
 
     def create
         post = Post.create!(post_params)
+        post.picture.attach(post_params[:picture])
         render json:  post, status: :created
     end
 
@@ -32,7 +33,7 @@ class PostsController < ApplicationController
     end
 
     def post_params
-        params.permit(:room_member_id, :channel_id,  :content)
+        params.permit(:room_member_id, :channel_id, :picture, :content)
     end
 
 end

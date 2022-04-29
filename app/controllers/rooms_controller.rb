@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-    #skip_before_action :authorize, only: [:index]
+    skip_before_action :authorize, only: [:index]
 
     def index
         render json: Room.all, status: :ok
@@ -25,12 +25,14 @@ class RoomsController < ApplicationController
 
     def update
         room = find_room
+        
         if is_admin?
             room.update(room_params)
             render json: room
-        else
-            render json: { error: 'Not admin of board'}, status:  :unauthorized
+        else 
+            render json: { error: 'not admin of room' }, status: :unauthorized
         end
+        
     end
 
     def destroy
@@ -50,7 +52,7 @@ class RoomsController < ApplicationController
     end
 
     def is_admin?
-        room_member = RoomMember.find_by!(user_id: @current_user.id, board: params[:id])
+        room_member = RoomMember.find_by!(user_id: @current_user.id, room: params[:id])
         room_member.is_admin
     end
 

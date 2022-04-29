@@ -1,10 +1,11 @@
 import React from "react";
 import { useState } from "react";
-import { useUser } from "../Context/UserContext";
+import { useUser, useUserUpdate } from "../Context/UserContext";
 import { useNavigate } from "react-router-dom";
 
 function New() {
   const currentUser = useUser();
+  const setCurrentUser = useUserUpdate();
 
   const [addRoomState, setAddRoomState] = useState({
     name: "",
@@ -12,6 +13,10 @@ function New() {
   });
 
   let navigate = useNavigate();
+
+  function handleSetUser(user) {
+    setCurrentUser(user);
+  }
 
   function handleAddRoom(e) {
     e.preventDefault();
@@ -21,10 +26,20 @@ function New() {
       headers: {
         "Content-type": "application/json",
       },
-      body: JSON.stringify(addRoomState),
+      body: JSON.stringify({
+        name: addRoomState.name,
+        user_id: currentUser.id,
+      }),
     }).then((r) => {
       if (r.ok) {
-        r.json().then(console.log(r));
+        fetch("/autologin").then((r) => {
+          if (r.ok) {
+            r.json().then((user) => {
+              handleSetUser(user);
+            });
+          }
+        });
+        // r.json().then(setCurrentUser.rooms);
         // .then(navigate(`/boards/${r.id}`));
       }
     });
