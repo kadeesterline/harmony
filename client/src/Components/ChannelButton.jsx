@@ -5,6 +5,7 @@ import { useChannel, useChannelUpdate } from "../Context/ChannelContext";
 import { useMember } from "../Context/MemberContext";
 import { useUserUpdate } from "../Context/UserContext";
 import EditChannelForm from "./EditChannelForm";
+import { GrTrash, GrEdit } from "react-icons/gr";
 
 function ChannelButton({ channel }) {
   const [showEditChannel, setShowEditChannel] = useState(false);
@@ -55,36 +56,34 @@ function ChannelButton({ channel }) {
   }
 
   return (
-    <div className="flex justify-center">
-      <div
-        onClick={handleChannelButtonClick}
-        className=" mt-4 ml-24 w-1/4 h-10 rounded-lg bg-slate-300"
-      >
-        {channelState.name}
-      </div>
-      {currentMember.is_admin ? (
-        <div>
-          <button
-            className="ml-5 mt-4 w-1/4 h-10 rounded-full bg-green-1050"
-            onClick={handleDeleteChannel}
-          >
-            {" "}
-            Delete Channel{" "}
-          </button>
-          <button
-            className="ml-5 mt-4 w-1/4 h-10 rounded-full bg-green-1050"
-            onClick={toggleShowEditChannel}
-          >
-            {" "}
-            Rename Channel
-          </button>
-          <EditChannelForm
-            channel={channel}
-            showEditChannel={showEditChannel}
-            setChannelState={setChannelState}
-          />
+    <div className="flex justify-center mr-3">
+      <div className="flex items-center  mt-4 ml-24 w-3/4 h-10 rounded-lg bg-slate-300">
+        <div onClick={handleChannelButtonClick} className="float-left">
+          {channelState.name}
         </div>
-      ) : null}
+
+        {currentMember.is_admin ? (
+          <div className="right-0 absolute">
+            <button
+              className=" float-right text-xl mx-3 "
+              onClick={handleDeleteChannel}
+            >
+              <GrTrash />
+            </button>
+            <button
+              className=" float-right text-xl  mx-3 "
+              onClick={toggleShowEditChannel}
+            >
+              <GrEdit />
+            </button>
+            <EditChannelForm
+              channel={channel}
+              showEditChannel={showEditChannel}
+              setChannelState={setChannelState}
+            />
+          </div>
+        ) : null}
+      </div>
     </div>
   );
 }

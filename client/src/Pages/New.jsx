@@ -51,18 +51,28 @@ function New() {
   }
 
   return (
-    <div className="bg-slate-200 w-1/2 h-56 left-80 rounded-2xl mx-10 my-20 absolute ">
-      <form className="mt-10" autoComplete="nope" onSubmit={handleAddRoom}>
-        <label htmlFor="name"> Create a Room: </label>
-        <input
-          autoComplete="nope"
-          type="text"
-          name="name"
-          value={addRoomState.name}
-          onChange={(e) => handleChange(e)}
-        ></input>
-        <button type="submit"> Create </button>
-      </form>
+    <div className="flex items-center justify-center">
+      <div className="bg-slate-200  m-5 w-1/2 h-56 rounded-2xl flex items-center justify-center">
+        <form className="" autoComplete="nope" onSubmit={handleAddRoom}>
+          <label htmlFor="name"> Create a Room: </label>
+          <input
+            autoComplete="nope"
+            type="text"
+            name="name"
+            value={addRoomState.name}
+            onChange={(e) => handleChange(e)}
+            className="border rounded-lg w-96"
+          ></input>
+
+          <button
+            className="bg-green-1050 rounded-full p-3 my-2 mx-1 text-white"
+            type="submit"
+          >
+            {" "}
+            Create{" "}
+          </button>
+        </form>
+      </div>
 
       {/* <form></form> */}
     </div>
