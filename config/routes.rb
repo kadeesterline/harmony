@@ -16,6 +16,9 @@ Rails.application.routes.draw do
 	delete '/logout', to: 'sessions#destroy'
   get '/sessions/:user_id', to: 'sessions#show'
 	get '/autologin', to: 'users#show'
+  # put '/putpicture', to: 'posts#add_picture'
+
+  post 'rails/active_storage/direct_uploads', to: 'direct_uploads#create'
 
   get '*path',
 	    to: 'fallback#index',

@@ -1,13 +1,21 @@
 import React from "react";
 import { useMember } from "../Context/MemberContext";
 import { useChannel } from "../Context/ChannelContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import EditReplyForm from "./EditReplyForm";
+import { GrTrash, GrEdit } from "react-icons/gr";
 
 function Reply({ reply, setChannelMessages }) {
   const currentMember = useMember();
   const [showEditReply, setShowEditReply] = useState(false);
   const currentChannel = useChannel();
+  const [image, setImage] = useState({});
+
+  useEffect(() => {
+    fetch(`/replies/${reply.id}`)
+      .then((r) => r.json())
+      .then((r) => setImage(r.image));
+  }, [currentChannel]);
 
   function handleDeleteReply() {
     fetch(`/replies/${reply.id}`, {
@@ -32,31 +40,28 @@ function Reply({ reply, setChannelMessages }) {
   }
 
   return (
-    <div className="border-2 border-blue-600">
-      {reply.content}
-      {currentMember.id === reply.room_member_id ? (
-        <div>
-          <button
-            className=" m-2 w-10 h-10  rounded-full bg-green-1050"
-            onClick={handleDeleteReply}
-          >
-            {" "}
-            Delete{" "}
-          </button>
-          <button
-            className=" m-2 w-10 h-10  rounded-full bg-green-1050"
-            onClick={toggleShowEditReply}
-          >
-            {" "}
-            Edit Reply{" "}
-          </button>
-          <EditReplyForm
-            showEditReply={showEditReply}
-            reply={reply}
-            setChannelMessages={setChannelMessages}
-          />
-        </div>
-      ) : null}
+    <div className="col-span-1">
+      <div className="bg-slate-200 p-5 w-96  rounded-lg">
+        {reply.content}
+        {image ? (
+          <img src={`http://localhost:3000/${image}`} alt="reply" />
+        ) : null}
+        {currentMember.id === reply.room_member_id ? (
+          <div>
+            <button className=" m-2 float-right " onClick={handleDeleteReply}>
+              <GrTrash />
+            </button>
+            <button className=" m-2 float-right" onClick={toggleShowEditReply}>
+              <GrEdit />
+            </button>
+            <EditReplyForm
+              showEditReply={showEditReply}
+              reply={reply}
+              setChannelMessages={setChannelMessages}
+            />
+          </div>
+        ) : null}
+      </div>
     </div>
   );
 }

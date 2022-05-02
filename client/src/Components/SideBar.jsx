@@ -7,6 +7,7 @@ import RoomButton from "./RoomButton";
 import AddChannelForm from "./AddChannelForm";
 import ChannelButton from "./ChannelButton";
 import EditRoomForm from "./EditRoomForm";
+import { GrTrash } from "react-icons/gr";
 
 function SideBar() {
   let [showAddChannel, setShowAddChannel] = useState(false);
@@ -48,7 +49,10 @@ function SideBar() {
 
   const channelList = currentRoom?.map((r) =>
     r.channels?.map((channel) => (
-      <ChannelButton key={channel.id + channel.name} channel={channel} />
+      <ChannelButton
+        key={channel.id + channel.name + channel}
+        channel={channel}
+      />
     ))
   );
 
@@ -83,17 +87,16 @@ function SideBar() {
   }
 
   return (
-    <div className="w-80 h-full shadow-md bg-green-950 absolute">
+    <div className="w-80 h-full shadow-md bg-green-950 fixed left-0">
       <div className="w-20 h-full shadow-md bg-green-1000 absolute">
         {roomButtons}
-        <div className="m-auto mt-4">
+        <div className="mt-4">
           {currentMember.is_admin ? (
             <button
-              className=" w-10 h-10 rounded-full bg-green-1050"
+              className="m-auto w-16 h-16 rounded-full bg-green-1050 text-2xl flex justify-center items-center"
               onClick={handleDeleteRoom}
             >
-              {" "}
-              Delete Room{" "}
+              <GrTrash />
             </button>
           ) : null}
         </div>

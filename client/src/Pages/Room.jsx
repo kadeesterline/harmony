@@ -5,16 +5,19 @@ import { useUser, useUserUpdate } from "../Context/UserContext";
 import { useChannel, useChannelUpdate } from "../Context/ChannelContext";
 import { useMember, useMemberUpdate } from "../Context/MemberContext";
 import Message from "../Components/Message";
+import { GrAdd } from "react-icons/gr";
+import { DirectUpload } from "activestorage";
 
 function Room() {
   const handleSetChannel = useChannelUpdate();
   const currentChannel = useChannel();
+  const setCurrentChannel = useChannelUpdate();
   const currentMember = useMember();
   const setCurrentUser = useUserUpdate();
 
   const [chatInput, setChatInput] = useState({
     content: "",
-    picture: {},
+    image: {},
   });
 
   const [channelMessages, setChannelMessages] = useState({});
@@ -26,7 +29,7 @@ function Room() {
   }
 
   useEffect(() => {
-    console.log(currentChannel.id);
+    // console.log(currentChannel.id);
     fetch(`/channels/${currentChannel?.id}`).then((r) => {
       if (r.ok) {
         r.json().then(setChannelMessages);
@@ -40,23 +43,60 @@ function Room() {
 
   function handleAddPost(e) {
     e.preventDefault();
-    console.log(chatInput);
+    // console.log("chatInput content:", chatInput.content);
+    // console.log("chatInput image:", chatInput.image);
+
+    let post = {
+      content: chatInput.content,
+      channel_id: currentChannel?.id,
+      room_member_id: currentMember?.id,
+    };
+
     fetch("/posts", {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify({
-        content: chatInput.content,
-        picture: chatInput.image,
-        channel_id: currentChannel?.id,
-        room_member_id: currentMember?.id,
-      }),
+      body: JSON.stringify(post),
     }).then((r) => {
-      if (r.ok) {
-        fetch(`/channels/${currentChannel?.id}`).then((r) => {
+      //if (r.ok) {
+      r.json().then((data) => uploadFile(chatInput.image, data));
+      // .then(
+
+      //   // fetch(`/channels/${currentChannel?.id}`).then((r) => {
+      //   //   if (r.ok) {
+      //   //     r.json().then("response", console.log);
+      //   //   }
+      //   // })
+      // );
+      //}
+    });
+  }
+
+  function uploadFile(file, post) {
+    const upload = new DirectUpload(
+      file,
+      "http://localhost:3000/rails/active_storage/direct_uploads"
+    );
+    upload.create((error, blob) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("blob:", blob);
+        fetch(`http://localhost:3000/posts/${post.id}`, {
+          method: "PUT",
+          headers: {
+            "Content-type": "application/json",
+            accept: "application/json",
+          },
+          body: JSON.stringify({ image: blob.signed_id }),
+        }).then((r) => {
           if (r.ok) {
-            r.json().then(setChannelMessages);
+            fetch(`/channels/${currentChannel?.id}`).then((r) => {
+              if (r.ok) {
+                r.json().then(setChannelMessages);
+              }
+            });
           }
         });
       }
@@ -64,11 +104,13 @@ function Room() {
   }
 
   const channelPosts = channelMessages?.posts?.map((post) => (
-    <Message
-      key={post.id + post.content}
-      message={post}
-      setChannelMessages={setChannelMessages}
-    />
+    <div className="flex grid-rows-1">
+      <Message
+        key={post.id + post.content + "post"}
+        message={post}
+        setChannelMessages={setChannelMessages}
+      />
+    </div>
   ));
 
   // function handleChange(e) {
@@ -90,27 +132,27 @@ function Room() {
   }
 
   return (
-    <div className="bg-slate-500  left-80 absolute">
-      <div className="border-2 border-red-600 w-100 p-10 h-100  absolute">
+    <div className="left-80 absolute">
+      <div className=" w-100 p-10 h-100  absolute">
         <div>{channelPosts}</div>
       </div>
 
-      <div className=" w-96 h-20 bottom-40  fixed bg-green-1000  ">
-        <form onSubmit={handleAddPost}>
+      <div className="w-100 h-20 bottom-0 fixed bg-green-1000  ">
+        <form onSubmit={handleAddPost} className="grid grid-cols-2 gap-9 ml-18">
           <input
             autoComplete="nope"
             type="textarea"
             name="content"
             value={chatInput.content}
             onChange={(e) => handleChange(e)}
-            className="border-2 w-full m-5 rounded-lg  h-11"
+            className="border-2  m-5 rounded-lg  h-11"
+            id="chat-input"
           ></input>
 
           <input
             type="file"
             name="image"
             onChange={(e) => handleChange(e)}
-            className="border-2 w-full m-5 float-right left-80 rounded-lg h-11"
           ></input>
         </form>
       </div>

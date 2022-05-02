@@ -31,8 +31,29 @@ c5 = Channel.create(name: 'channel 5', room_id: 3)
 c6 = Channel.create(name: 'channel 6', room_id: 4)
 
 p1 = Post.create(room_member_id: 1, channel_id: 1, content: 'test post 1')
+
+p1.image.attach(
+    io: File.open('./public/images/download.jpeg'),
+    filename: 'download.jpeg',
+    content_type: 'application/jpeg'
+)
+
 p2 = Post.create(room_member_id: 2, channel_id: 1, content: 'test post 2')
+
+p2.image.attach(
+    io: File.open('./public/images/download (1).jpeg'),
+    filename: 'download (1).jpeg',
+    content_type: 'application/jpeg'
+)
+
 p3 = Post.create(room_member_id: 3, channel_id: 3, content: 'test post 3')
+
+p3.image.attach(
+    io: File.open('./public/images/download (2).jpeg'),
+    filename: 'download (3).jpeg',
+    content_type: 'application/jpeg'
+)
+
 p4 = Post.create(room_member_id: 4, channel_id: 4, content: 'test post 4')
 p5 = Post.create(room_member_id: 1, channel_id: 1, content: 'test post 5')
 p6 = Post.create(room_member_id: 2, channel_id: 1, content: 'test post 6')
@@ -41,7 +62,21 @@ p8 = Post.create(room_member_id: 4, channel_id: 4, content: 'test post 8')
 
 
 re1 = Reply.create(post_id: 1, room_member_id: 1, content: 'test reply 1')
+
+re1.image.attach(
+    io: File.open('./public/images/download (2).jpeg'),
+    filename: 'download (3).jpeg',
+    content_type: 'application/jpeg'
+)
+
 re2 = Reply.create(post_id: 1, room_member_id: 1, content: 'test reply 2')
+
+re2.image.attach(
+    io: File.open('./public/images/download (1).jpeg'),
+    filename: 'download (1).jpeg',
+    content_type: 'application/jpeg'
+)
+
 re3 = Reply.create(post_id: 1, room_member_id: 1, content: 'test reply 3')
 re4 = Reply.create(post_id: 2, room_member_id: 2, content: 'test reply 4')
 re5 = Reply.create(post_id: 2, room_member_id: 2, content: 'test reply 5')

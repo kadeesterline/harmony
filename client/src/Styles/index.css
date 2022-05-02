@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  background: #ececec;
+}
+
+#chat-input {
+  width: 50rem;
+}
+
+#file-input {
+  width: 18rem;
+  margin-left: 26rem;
+}
+
+#submit-chat {
+  margin-left: 20rem;
+}
