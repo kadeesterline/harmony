@@ -147,7 +147,13 @@ function Message({ message, setChannelMessages }) {
         ) : null}
       </div>
 
-      <div className="grid-rows-1 col-span-1 bg-green-1000 p-2 rounded-lg">
+      <div
+        className={
+          showThread
+            ? "grid-rows-1 col-span-1 bg-green-1000 p-2 rounded-lg"
+            : "p-2 grid-rows-1 col-span-2 "
+        }
+      >
         {showThread ? replies : null}
       </div>
 
@@ -189,15 +195,18 @@ function Message({ message, setChannelMessages }) {
           <form autoComplete="nope" onSubmit={handleNewReply}>
             <input
               autoComplete="nope"
+              placeholder="enter reply"
               type="text-area"
               name="content"
               value={replyInput.content}
               onChange={(e) => handleReplyChange(e)}
+              className="border-2 rounded-lg my-2 w-96"
             ></input>
             <input
               type="file"
               name="image"
               onChange={(e) => handleReplyChange(e)}
+              className="border-2 rounded-lg my-2 bg-white w-96"
             ></input>
           </form>
         ) : null}

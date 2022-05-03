@@ -44,10 +44,11 @@ function AddChannelForm() {
   }
 
   return (
-    <div className="absolute bottom-20 left-52">
+    <div className="absolute  left-56">
       <form onSubmit={handleAddChannel}>
         <input
           autoComplete="none"
+          placeholder="channel name"
           type="text"
           name="name"
           value={channelFormInput.channel_name}
