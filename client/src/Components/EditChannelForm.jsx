@@ -28,16 +28,19 @@ function EditChannelForm({ channel, showEditChannel, setChannelState }) {
   return (
     <div>
       {showEditChannel ? (
-        <form onSubmit={handleEditChannel}>
-          <input
-            autoComplete="nope"
-            type="text"
-            name="name"
-            value={editChannelInput.name}
-            onChange={(e) => handleChange(e)}
-            className="border-2 rounded-lg"
-          ></input>
-        </form>
+        <div className="w-100">
+          <form onSubmit={handleEditChannel}>
+            <input
+              autoComplete="nope"
+              placeholder="enter new channel name"
+              type="text"
+              name="name"
+              value={editChannelInput.name}
+              onChange={(e) => handleChange(e)}
+              className="border-2 rounded-lg"
+            ></input>
+          </form>
+        </div>
       ) : null}
     </div>
   );

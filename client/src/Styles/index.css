@@ -12,9 +12,33 @@ body {
 
 #file-input {
   width: 18rem;
-  margin-left: 26rem;
+  margin-left: 16rem;
 }
 
 #submit-chat {
   margin-left: 20rem;
+}
+
+#message-container {
+  height: 100;
+}
+
+.custom-file-upload::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+.custom-file-upload::before {
+  content: "📎";
+  display: inline-block;
+  border-radius: 3px;
+  padding: 15px 8px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 25pt;
+}
+.custom-file-upload:hover::before {
+  border-color: black;
 }

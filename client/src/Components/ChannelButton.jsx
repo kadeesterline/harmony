@@ -71,7 +71,7 @@ function ChannelButton({ channel }) {
               <GrTrash />
             </button>
             <button
-              className=" float-right text-xl  mx-3 "
+              className=" float-right text-xl  mx-3  "
               onClick={toggleShowEditChannel}
             >
               <GrEdit />

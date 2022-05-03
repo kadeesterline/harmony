@@ -39,11 +39,12 @@ function EditReplyForm({ reply, showEditReply, setChannelMessages }) {
         <form onSubmit={handleEditReply}>
           <input
             autoComplete="nope"
+            placeholder="enter new reply"
             type="text"
             name="content"
             value={editReplyInput.content}
             onChange={(e) => handleChange(e)}
-            className="border-2 rounded-lg"
+            className="border-2 rounded-lg w-96"
           ></input>
         </form>
       ) : null}

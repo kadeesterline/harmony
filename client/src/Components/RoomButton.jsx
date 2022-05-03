@@ -25,13 +25,19 @@ function RoomButton({ name, id, handleChangeRoom }) {
     findMember();
   }
 
+  const firstLetters = name
+    .toUpperCase()
+    .split(" ")
+    .map((word) => word[0])
+    .join("");
+
   return (
-    <div
+    <button
       onClick={handleRoomButtonClick}
-      className="m-auto mt-4 w-16 h-16 rounded-full bg-green-1050 flex justify-center items-center"
+      className="m-auto mt-4 w-16 h-16 rounded-full bg-green-1050 flex justify-center items-center "
     >
-      {name}
-    </div>
+      {firstLetters}
+    </button>
   );
 }
 

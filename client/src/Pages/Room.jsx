@@ -5,7 +5,7 @@ import { useUser, useUserUpdate } from "../Context/UserContext";
 import { useChannel, useChannelUpdate } from "../Context/ChannelContext";
 import { useMember, useMemberUpdate } from "../Context/MemberContext";
 import Message from "../Components/Message";
-import { GrAdd } from "react-icons/gr";
+import { GrAdd, GrFormAttachment } from "react-icons/gr";
 import { DirectUpload } from "activestorage";
 
 function Room() {
@@ -133,14 +133,15 @@ function Room() {
 
   return (
     <div className="left-80 absolute">
-      <div className=" w-100 p-10 h-100  absolute">
+      <div id="message-container" className="p-10 w-100 overflow-auto absolute">
         <div>{channelPosts}</div>
       </div>
 
       <div className="w-100 h-20 bottom-0 fixed bg-green-1000  ">
-        <form onSubmit={handleAddPost} className="grid grid-cols-2 gap-9 ml-18">
+        <form onSubmit={handleAddPost} className="grid grid-cols-2 ">
           <input
             autoComplete="nope"
+            placeholder="Enter a new message"
             type="textarea"
             name="content"
             value={chatInput.content}
@@ -153,6 +154,8 @@ function Room() {
             type="file"
             name="image"
             onChange={(e) => handleChange(e)}
+            className="custom-file-upload"
+            id="file-input"
           ></input>
         </form>
       </div>

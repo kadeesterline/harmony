@@ -42,11 +42,12 @@ function EditRoomForm({ showEditRoom }) {
   }
 
   return (
-    <div className="absolute bottom-32 left-52">
+    <div className="absolute bottom-20 left-52">
       {showEditRoom ? (
         <form onSubmit={handleEditRoom}>
           <input
             autoComplete="nope"
+            placeholder="enter new room name"
             type="text"
             name="name"
             value={editRoomInput.name}

@@ -1,13 +1,14 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useUser, useUserUpdate } from "../Context/UserContext";
 import { useMember, useMemberUpdate } from "../Context/MemberContext";
+
 import RoomButton from "./RoomButton";
 import AddChannelForm from "./AddChannelForm";
 import ChannelButton from "./ChannelButton";
 import EditRoomForm from "./EditRoomForm";
-import { GrTrash } from "react-icons/gr";
+import { GrTrash, GrAdd, GrEdit } from "react-icons/gr";
 
 function SideBar() {
   let [showAddChannel, setShowAddChannel] = useState(false);
@@ -99,35 +100,41 @@ function SideBar() {
               <GrTrash />
             </button>
           ) : null}
+          <Link
+            to="/new"
+            className="m-auto w-16 h-16 mt-4 rounded-full bg-green-1050 text-2xl flex justify-center items-center"
+          >
+            <GrAdd />
+          </Link>
         </div>
       </div>
 
-      <div>{channelList}</div>
+      <div className="">
+        {currentRoom?.name}
+        {channelList}
+        <button
+          onClick={handleShowAddChannel}
+          className="absolute text-2xl bg-green-1050 mt-4 ml-44 p-2 rounded-full"
+        >
+          <GrAdd />
+        </button>
+
+        {showAddChannel ? <AddChannelForm /> : null}
+      </div>
 
       {currentMember.is_admin ? (
         <div>
           <button
-            className="absolute bottom-32 left-20 bg-green-1050 p-2 m-2 rounded-full"
+            className="absolute bottom-24 text-2xl left-20 bg-green-1050 p-2 ml-24 rounded-full"
             onClick={toggleShowEditRoom}
           >
-            {" "}
-            Rename Room{" "}
+            <GrEdit />
           </button>
           <EditRoomForm showEditRoom={showEditRoom} />
         </div>
       ) : null}
 
-      <button
-        onClick={handleShowAddChannel}
-        className="absolute bottom-20 left-20 bg-green-1050 p-2 m-2 rounded-full"
-      >
-        {" "}
-        Add Channel{" "}
-      </button>
-
-      {showAddChannel ? <AddChannelForm /> : null}
-
-      <div className="w-80 h-20 shadow-md bg-green-1050 bottom-0 absolute">
+      <div className="w-80 h-20 shadow-md bg-green-1050 bottom-0 absolute flex justify-center items-center text-2xl  ">
         {currentUser.username}
       </div>
     </div>

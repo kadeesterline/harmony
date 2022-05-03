@@ -38,11 +38,12 @@ function EditMessageForm({ message, showEditMessage, setChannelMessages }) {
         <form onSubmit={handleEditMessage}>
           <input
             autoComplete="nope"
+            placeholder="enter new message"
             type="text"
             name="content"
             value={editMessageInput.content}
             onChange={(e) => handleChange(e)}
-            className="border-2 rounded-lg"
+            className="border-2 rounded-lg w-96"
           ></input>
         </form>
       ) : null}
