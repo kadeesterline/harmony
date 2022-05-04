@@ -44,7 +44,10 @@ function Reply({ reply, setChannelMessages }) {
       <div className="bg-slate-200 p-5 w-96 h-100 m-2 rounded-lg">
         <div className="mb-5">{reply.content}</div>
         {image ? (
-          <img src={`http://localhost:3000/${image}`} alt="reply" />
+          <img
+            src={`http://haromony-project.herokuapp.com/${image}`}
+            alt="reply"
+          />
         ) : null}
         {currentMember.id === reply.room_member_id ? (
           <div className="mb-5">

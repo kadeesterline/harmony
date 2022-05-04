@@ -56,7 +56,7 @@ function Message({ message, setChannelMessages }) {
   }
 
   function handleNewReply(e) {
-    //console.log(replyInput.content);
+    console.log(replyInput);
     e.preventDefault();
 
     let reply = {
