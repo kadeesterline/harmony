@@ -59,6 +59,7 @@ function Message({ message, setChannelMessages }) {
     console.log(replyInput);
     e.preventDefault();
 
+    //create object to send
     let reply = {
       content: replyInput.content,
       channel_id: currentChannel?.id,
