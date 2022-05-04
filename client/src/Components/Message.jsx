@@ -148,7 +148,10 @@ function Message({ message, setChannelMessages }) {
       <div className="bg-white p-5 w-96 col-span-1 rounded-lg border ">
         {message.content}
         {image ? (
-          <img src={`http://localhost:3000/${image}`} alt="post" />
+          <img
+            src={`http://haromony-project.herokuapp.com/${image}`}
+            alt="post"
+          />
         ) : null}
       </div>
 
