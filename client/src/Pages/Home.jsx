@@ -9,14 +9,14 @@ function Home() {
         <div>
           <Link
             className="bg-green-1050 rounded-full p-2 my-2 mx-1 text-white"
-            to="/login"
+            to="/signin"
           >
             {" "}
             Sign In{" "}
           </Link>
           <Link
             className="bg-green-1050 rounded-full p-2 my-2 mx-1 text-white"
-            to="/signup"
+            to="/newuser"
           >
             {" "}
             Sign Up{" "}
