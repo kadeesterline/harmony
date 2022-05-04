@@ -96,7 +96,7 @@ function Message({ message, setChannelMessages }) {
   function uploadFile(file, reply) {
     const upload = new DirectUpload(
       file,
-      "http://harmony-project.herokuapp.com/rails/active_storage/direct_uploads"
+      "http://localhost:3000/rails/active_storage/direct_uploads"
     );
     upload.create((error, blob) => {
       if (error) {
@@ -149,10 +149,7 @@ function Message({ message, setChannelMessages }) {
       <div className="bg-white p-5 w-96 col-span-1 rounded-lg border ">
         {message.content}
         {image ? (
-          <img
-            src={`http://haromony-project.herokuapp.com/${image}`}
-            alt="post"
-          />
+          <img src={`http://localhost:3000/${image}`} alt="post" />
         ) : null}
       </div>
 
