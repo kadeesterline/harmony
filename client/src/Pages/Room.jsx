@@ -82,7 +82,7 @@ function Room() {
   function uploadFile(file, post) {
     const upload = new DirectUpload(
       file,
-      "http://localhost:3000/rails/active_storage/direct_uploads"
+      "http://harmony-project.herokuapp.com/rails/active_storage/direct_uploads"
     );
     upload.create((error, blob) => {
       if (error) {
