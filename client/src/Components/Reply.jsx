@@ -40,18 +40,24 @@ function Reply({ reply, setChannelMessages }) {
   }
 
   return (
-    <div className="col-span-1">
-      <div className="bg-slate-200 p-5 w-96  rounded-lg">
-        {reply.content}
+    <div className="col-span-1 ">
+      <div className="bg-slate-200 p-5 w-96 h-100 m-2 rounded-lg">
+        <div className="mb-5">{reply.content}</div>
         {image ? (
           <img src={`http://localhost:3000/${image}`} alt="reply" />
         ) : null}
         {currentMember.id === reply.room_member_id ? (
-          <div>
-            <button className=" m-2 float-right " onClick={handleDeleteReply}>
+          <div className="mb-5">
+            <button
+              className=" mb-4 mx-3 float-right "
+              onClick={handleDeleteReply}
+            >
               <GrTrash />
             </button>
-            <button className=" m-2 float-right" onClick={toggleShowEditReply}>
+            <button
+              className=" mb-4 mx-3 float-right"
+              onClick={toggleShowEditReply}
+            >
               <GrEdit />
             </button>
             <EditReplyForm

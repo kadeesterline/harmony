@@ -59,9 +59,15 @@ function Room() {
       },
       body: JSON.stringify(post),
     }).then((r) => {
-      //if (r.ok) {
-      r.json().then((data) => uploadFile(chatInput.image, data));
-      // .then(
+      if (chatInput.image) {
+        r.json().then((data) => uploadFile(chatInput.image, data));
+      } else {
+        fetch(`/channels/${currentChannel?.id}`).then((r) => {
+          if (r.ok) {
+            r.json().then(setChannelMessages);
+          }
+        });
+      }
 
       //   // fetch(`/channels/${currentChannel?.id}`).then((r) => {
       //   //   if (r.ok) {

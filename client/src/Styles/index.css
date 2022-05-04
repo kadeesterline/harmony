@@ -7,12 +7,12 @@ body {
 }
 
 #chat-input {
-  width: 50rem;
+  width: 75rem;
 }
 
 #file-input {
   width: 18rem;
-  margin-left: 16rem;
+  margin-left: 27rem;
 }
 
 #submit-chat {

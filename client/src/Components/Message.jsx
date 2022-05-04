@@ -73,8 +73,15 @@ function Message({ message, setChannelMessages }) {
       },
       body: JSON.stringify(reply),
     }).then((r) => {
-      r.json().then((data) => uploadFile(replyInput.image, data));
-
+      if (replyInput.image) {
+        r.json().then((data) => uploadFile(replyInput.image, data));
+      } else {
+        fetch(`/channels/${currentChannel?.id}`).then((r) => {
+          if (r.ok) {
+            r.json().then(setChannelMessages);
+          }
+        });
+      }
       // if (r.ok) {
       //   fetch(`/channels/${currentChannel?.id}`).then((r) => {
       //     if (r.ok) {
@@ -103,13 +110,11 @@ function Message({ message, setChannelMessages }) {
           },
           body: JSON.stringify({ image: blob.signed_id }),
         }).then((r) => {
-          if (r.ok) {
-            fetch(`/channels/${currentChannel?.id}`).then((r) => {
-              if (r.ok) {
-                r.json().then(setChannelMessages);
-              }
-            });
-          }
+          fetch(`/channels/${currentChannel?.id}`).then((r) => {
+            if (r.ok) {
+              r.json().then(setChannelMessages);
+            }
+          });
         });
       }
     });
@@ -129,7 +134,7 @@ function Message({ message, setChannelMessages }) {
   }
 
   const replies = message?.replies?.map((reply) => (
-    <div className="flex grid-cols-1">
+    <div className="flex grid-cols-1 ">
       <Reply
         key={reply.id + reply.content}
         reply={reply}
@@ -150,8 +155,8 @@ function Message({ message, setChannelMessages }) {
       <div
         className={
           showThread
-            ? "grid-rows-1 col-span-1 bg-green-1000 p-2 rounded-lg"
-            : "p-2 grid-rows-1 col-span-2 "
+            ? "grid-rows-1 col-span-1  bg-green-1000 p-2 rounded-lg"
+            : "p-2 grid-rows-1 col-span-2  "
         }
       >
         {showThread ? replies : null}
@@ -206,7 +211,7 @@ function Message({ message, setChannelMessages }) {
               type="file"
               name="image"
               onChange={(e) => handleReplyChange(e)}
-              className="border-2 rounded-lg my-2 bg-white w-96"
+              className="custom-file-upload"
             ></input>
           </form>
         ) : null}
