@@ -9,6 +9,7 @@ import AddChannelForm from "./AddChannelForm";
 import ChannelButton from "./ChannelButton";
 import EditRoomForm from "./EditRoomForm";
 import { GrTrash, GrAdd, GrEdit } from "react-icons/gr";
+import { GoSignOut } from "react-icons/go";
 
 function SideBar() {
   let [showAddChannel, setShowAddChannel] = useState(false);
@@ -87,6 +88,16 @@ function SideBar() {
     });
   }
 
+  function handleSignOut() {
+    fetch(`/logout`, {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+        accept: "application/json",
+      },
+    }).then(navigate("/"));
+  }
+
   return (
     <div className="w-80 h-full shadow-md bg-green-950 fixed left-0">
       <div className="w-20 h-full shadow-md bg-green-1000 absolute">
@@ -136,6 +147,12 @@ function SideBar() {
 
       <div className="w-80 h-20 shadow-md bg-green-1050 bottom-0 absolute flex justify-center items-center text-2xl  ">
         {currentUser.username}
+        <button
+          className="bg-green-1000 p-3  mx-5 rounded-full text-3xl"
+          onClick={handleSignOut}
+        >
+          <GoSignOut />
+        </button>
       </div>
     </div>
   );

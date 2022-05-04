@@ -56,22 +56,22 @@ function ChannelButton({ channel }) {
   }
 
   return (
-    <div className="flex justify-center mr-3">
-      <div className="flex items-center  mt-4 ml-24 w-3/4 h-10 rounded-lg bg-slate-300">
+    <div className="flex justify-center mr-3 ">
+      <div className="flex items-center  mt-4 p-2 ml-24 w-3/4 h-10 rounded-lg bg-slate-300">
         <div onClick={handleChannelButtonClick} className="float-left">
           {channelState.name}
         </div>
 
         {currentMember.is_admin ? (
-          <div className="right-0 absolute">
+          <div className="right-2 absolute">
             <button
-              className=" float-right text-xl mx-3 "
+              className=" float-right text-xl mx-2 "
               onClick={handleDeleteChannel}
             >
               <GrTrash />
             </button>
             <button
-              className=" float-right text-xl  mx-3  "
+              className=" float-right text-xl  mx-1  "
               onClick={toggleShowEditChannel}
             >
               <GrEdit />
