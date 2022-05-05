@@ -16,6 +16,7 @@ function Message({ message, setChannelMessages }) {
   const [showThread, setShowThread] = useState(false);
   const [showEditMessage, setShowEditMessage] = useState(false);
   const [image, setImage] = useState({});
+  const [gif, setGif] = useState("");
   const currentMember = useMember();
   const currentChannel = useChannel();
 
@@ -151,6 +152,7 @@ function Message({ message, setChannelMessages }) {
         {image ? (
           <img src={`http://localhost:3000/${image}`} alt="post" />
         ) : null}
+        {message.gif_url ? <img src={message.gif_url} alt="gif" /> : null}
       </div>
 
       <div
