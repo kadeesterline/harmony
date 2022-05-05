@@ -4,15 +4,22 @@
 
 body {
   background: #ececec;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow-y: scroll;
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 #chat-input {
-  width: 75rem;
+  width: 50rem;
 }
 
 #file-input {
   width: 18rem;
-  margin-left: 27rem;
+  margin-left: 35rem;
 }
 
 #submit-chat {
@@ -41,4 +48,17 @@ body {
 }
 .custom-file-upload:hover::before {
   border-color: black;
+}
+
+.container {
+  column-count: 3;
+  column-gap: 0.25em;
+
+  /* display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: masonry; */
+}
+
+.item {
+  margin: 0 0 0.25em;
 }

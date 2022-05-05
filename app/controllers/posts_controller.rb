@@ -52,7 +52,7 @@ class PostsController < ApplicationController
     end
 
     def post_params
-        params.require(:post).permit(:room_member_id, :channel_id, :image, :content, :image_url)
+        params.require(:post).permit(:room_member_id, :channel_id, :image, :content, :image_url, :gif_url)
     end
 
 end

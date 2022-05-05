@@ -7,6 +7,7 @@ import { useMember, useMemberUpdate } from "../Context/MemberContext";
 import Message from "../Components/Message";
 import { GrAdd, GrFormAttachment } from "react-icons/gr";
 import { DirectUpload } from "activestorage";
+import GifPicker from "../Components/GifPicker";
 
 function Room() {
   const handleSetChannel = useChannelUpdate();
@@ -35,6 +36,8 @@ function Room() {
         r.json().then(setChannelMessages);
       }
     });
+
+    // console.log(process.env.REACT_APP_GIPHY_KEY);
   }, [currentChannel.id]);
 
   let navigate = useNavigate();
@@ -109,6 +112,29 @@ function Room() {
     });
   }
 
+  function handleSubmitGif(e, imgPath) {
+    e.preventDefault();
+    let post = {
+      gif_url: imgPath,
+      channel_id: currentChannel?.id,
+      room_member_id: currentMember?.id,
+    };
+    console.log(post);
+    fetch("/posts", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(post),
+    }).then((r) => {
+      fetch(`/channels/${currentChannel?.id}`).then((r) => {
+        if (r.ok) {
+          r.json().then(setChannelMessages);
+        }
+      });
+    });
+  }
+
   const channelPosts = channelMessages?.posts?.map((post) => (
     <div className="flex grid-rows-1">
       <Message
@@ -139,12 +165,12 @@ function Room() {
 
   return (
     <div className="left-80 absolute">
-      <div id="message-container" className="p-10 w-100 overflow-auto absolute">
+      <div id="message-container" className="p-10 w-100 absolute">
         <div>{channelPosts}</div>
       </div>
 
-      <div className="w-100 h-20 bottom-0 fixed bg-green-1000  ">
-        <form onSubmit={handleAddPost} className="grid grid-cols-2 ">
+      <div className="w-100 h-20 bottom-0 fixed bg-green-1000  grid grid-cols-2">
+        <form onSubmit={handleAddPost} className="grid grid-cols-3 ">
           <input
             autoComplete="nope"
             placeholder="Enter a new message"
@@ -164,6 +190,10 @@ function Room() {
             id="file-input"
           ></input>
         </form>
+
+        <div className=" absolute bottom-0 right-0 mb-2 ">
+          <GifPicker handleSubmitGif={handleSubmitGif} />
+        </div>
       </div>
     </div>
   );
