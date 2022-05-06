@@ -146,7 +146,7 @@ function Message({ message, setChannelMessages }) {
   ));
 
   return (
-    <div className=" flex grid-cols-2 gap-4 items-start w-100 bg-green-1100 border-2 rounded-xl mt-2 mb-5 p-8">
+    <div className=" flex grid-cols-2 gap-4 items-start w-100 bg-green-1100 border-2 rounded-xl mb-7 p-8">
       <div className="bg-white p-5 w-96 col-span-1 rounded-lg border ">
         {message.content}
         {image ? (

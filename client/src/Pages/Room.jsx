@@ -8,6 +8,8 @@ import Message from "../Components/Message";
 import { GrAdd, GrFormAttachment } from "react-icons/gr";
 import { DirectUpload } from "activestorage";
 import GifPicker from "../Components/GifPicker";
+import TipTap from "../Components/TipTap";
+import GifGrid from "../Components/GifGrid";
 
 function Room() {
   const handleSetChannel = useChannelUpdate();
@@ -16,6 +18,8 @@ function Room() {
   const currentMember = useMember();
   const setCurrentUser = useUserUpdate();
 
+  const [gifSearchResponse, setGifSearchResponse] = useState([]);
+  const [showGifs, setShowGifs] = useState(false);
   const [chatInput, setChatInput] = useState({
     content: "",
     image: {},
@@ -164,14 +168,34 @@ function Room() {
   }
 
   return (
-    <div className="left-80 absolute">
-      <div id="message-container" className="p-10 w-100 absolute">
-        <div>{channelPosts}</div>
+    <div className="room-div left-80 absolute h-100 grid grid-cols-1 ">
+      <div
+        id="message-container"
+        className="p-10 fixed bottom-52 h-96 overflow-y-auto   "
+      >
+        <div className="border-2 border-red-700">{channelPosts}</div>
+        <div className=" fixed right-0 bottom-52 h-96 overflow-y-auto ">
+          <GifGrid
+            handleSubmitGif={handleSubmitGif}
+            gifSearchResponse={gifSearchResponse}
+            showGifs={showGifs}
+          />
+        </div>
       </div>
 
-      <div className="w-100 h-20 bottom-0 fixed bg-green-1000  grid grid-cols-2">
-        <form onSubmit={handleAddPost} className="grid grid-cols-3 ">
-          <input
+      <div className=" bottom-0 right-0 fixed  bg-green-1000 chat-bar ">
+        <div className="flex ">
+          <TipTap />
+
+          <div className="grid grid-rows-2">
+            <GifPicker
+              setGifSearchResponse={setGifSearchResponse}
+              setShowGifs={setShowGifs}
+              showGifs={showGifs}
+            />
+
+            <form onSubmit={handleAddPost} className="mx-4 mt-4 ">
+              {/* <input
             autoComplete="nope"
             placeholder="Enter a new message"
             type="textarea"
@@ -180,19 +204,17 @@ function Room() {
             onChange={(e) => handleChange(e)}
             className="border-2  m-5 rounded-lg  h-11"
             id="chat-input"
-          ></input>
+          ></input> */}
 
-          <input
-            type="file"
-            name="image"
-            onChange={(e) => handleChange(e)}
-            className="custom-file-upload"
-            id="file-input"
-          ></input>
-        </form>
-
-        <div className=" absolute bottom-0 right-0 mb-2 ">
-          <GifPicker handleSubmitGif={handleSubmitGif} />
+              <input
+                type="file"
+                name="image"
+                onChange={(e) => handleChange(e)}
+                className="custom-file-upload"
+                id="file-input"
+              ></input>
+            </form>
+          </div>
         </div>
       </div>
     </div>
