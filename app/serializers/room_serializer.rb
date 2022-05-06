@@ -1,5 +1,5 @@
 class RoomSerializer < ActiveModel::Serializer
-    attributes :id, :name, :channels
+    attributes :id, :name, :channels, :room_members
     
     
     has_many :room_members
@@ -8,6 +8,10 @@ class RoomSerializer < ActiveModel::Serializer
     
     def channels
         object.channels.map { |c| c}
+    end
+
+    def room_members
+        object.room_members.map{ |m| m}
     end
     
 

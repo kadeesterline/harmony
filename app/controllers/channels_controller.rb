@@ -5,7 +5,7 @@ class ChannelsController < ApplicationController
     end
 
     def show
-        render json: find_channel
+        render json: find_channel, include: %W[room.room_members.users, posts, posts.replies], serializer: ChannelSerializer
     end
 
     def create

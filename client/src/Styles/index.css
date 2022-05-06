@@ -62,7 +62,7 @@ body::-webkit-scrollbar {
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #000;
-  width: 50rem;
+  width: 75%;
 }
 
 .menu-bar {
@@ -83,7 +83,8 @@ body::-webkit-scrollbar {
   background: white;
   border-radius: 0 0 5px 5px;
   min-height: 100px;
-  width: 50%;
+  max-height: 200px;
+  width: 100%;
 }
 .ProseMirror > * + * {
   margin-top: 0.75em;
@@ -134,10 +135,18 @@ body::-webkit-scrollbar {
 }
 
 .chat-bar {
+  /* min-width: 80%; */
 }
 
 #message-container {
-  height: 65rem;
+  padding-top: 10px;
+  height: 48rem;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+#message-container::-webkit-scrollbar {
+  display: none;
 }
 
 .room-div {
