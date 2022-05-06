@@ -3,9 +3,11 @@ import { useMember } from "../Context/MemberContext";
 import { useChannel } from "../Context/ChannelContext";
 import { useState, useEffect } from "react";
 import Reply from "./Reply";
-import EditMessageForm from "./EditMessageForm";
+// import EditMessageForm from "./EditMessageForm";
 import { GrTrash, GrEdit, GrAdd, GrDown } from "react-icons/gr";
 import { DirectUpload } from "activestorage";
+import TipTapMessage from "../Components/TipTapMessage";
+import TipTap from "../Components/TipTap";
 
 function Message({ message, setChannelMessages }) {
   const [showReply, setShowReply] = useState(false);
@@ -17,6 +19,9 @@ function Message({ message, setChannelMessages }) {
   const [showEditMessage, setShowEditMessage] = useState(false);
   const [image, setImage] = useState({});
   const [gif, setGif] = useState("");
+  const [editMessageInput, setEditMessageInput] = useState({
+    content: "",
+  });
   const currentMember = useMember();
   const currentChannel = useChannel();
 
@@ -135,6 +140,25 @@ function Message({ message, setChannelMessages }) {
     }
   }
 
+  function handleEditMessage(e) {
+    e.preventDefault();
+    fetch(`/posts/${message.id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(editMessageInput),
+    }).then((r) => {
+      if (r.ok) {
+        fetch(`/channels/${currentChannel?.id}`).then((r) => {
+          if (r.ok) {
+            r.json().then(setChannelMessages);
+          }
+        });
+      }
+    });
+  }
+
   const replies = message?.replies?.map((reply) => (
     <div className="flex grid-cols-1 ">
       <Reply
@@ -147,38 +171,55 @@ function Message({ message, setChannelMessages }) {
 
   return (
     <div className=" flex grid-cols-2 gap-4 items-start w-100 bg-green-1100 border-2 rounded-xl mb-7 p-8">
-      <div className="bg-white p-5 w-96 col-span-1 rounded-lg border ">
-        {message.content}
-        {image ? (
-          <img src={`http://localhost:3000/${image}`} alt="post" />
+      <div className="grid grid-cols-1">
+        {/* This is the actual message content */}
+        <div className="bg-white p-5 w-96 col-span-1 rounded-lg border ">
+          <TipTapMessage
+            message={message}
+            setEditMessageInput={setEditMessageInput}
+            handleEditMessage={handleEditMessage}
+          />
+          {image ? (
+            <img src={`http://localhost:3000/${image}`} alt="post" />
+          ) : null}
+          {message.gif_url ? <img src={message.gif_url} alt="gif" /> : null}
+        </div>
+
+        {/* This is the replies */}
+        <div
+          className={
+            showThread
+              ? "grid-rows-1 col-span-1  bg-green-1000 p-2 m-2 rounded-lg"
+              : "p-2 grid-rows-1 col-span-2  "
+          }
+        >
+          {showThread ? replies : null}
+        </div>
+
+        {/* This is the reply tiptap */}
+        {showReply ? (
+          <div className="col-span-1">
+            <TipTap setInputState={setReplyInput} />
+            <form autoComplete="nope" onSubmit={handleNewReply}>
+              <input
+                type="file"
+                name="image"
+                onChange={(e) => handleReplyChange(e)}
+                className="custom-file-upload"
+              ></input>
+            </form>
+            <button className="mx-3 p-2" onClick={handleNewReply}>
+              {" "}
+              Submit Reply{" "}
+            </button>
+          </div>
         ) : null}
-        {message.gif_url ? <img src={message.gif_url} alt="gif" /> : null}
       </div>
 
-      <div
-        className={
-          showThread
-            ? "grid-rows-1 col-span-1  bg-green-1000 p-2 rounded-lg"
-            : "p-2 grid-rows-1 col-span-2  "
-        }
-      >
-        {showThread ? replies : null}
-      </div>
-
+      {/* This is the button group on the side that should stay on the side  */}
       <div>
         {currentMember.id === message.room_member_id ? (
           <div>
-            <button
-              className=" m-2 float-right rounded-full "
-              onClick={toggleShowEditMessage}
-            >
-              <GrEdit />
-            </button>
-            <EditMessageForm
-              showEditMessage={showEditMessage}
-              message={message}
-              setChannelMessages={setChannelMessages}
-            />
             <button
               className=" m-2  float-right rounded-full "
               onClick={handleDeleteMessage}
@@ -199,25 +240,6 @@ function Message({ message, setChannelMessages }) {
         >
           <GrAdd />
         </button>
-        {showReply ? (
-          <form autoComplete="nope" onSubmit={handleNewReply}>
-            <input
-              autoComplete="nope"
-              placeholder="enter reply"
-              type="text-area"
-              name="content"
-              value={replyInput.content}
-              onChange={(e) => handleReplyChange(e)}
-              className="border-2 rounded-lg my-2 w-96"
-            ></input>
-            <input
-              type="file"
-              name="image"
-              onChange={(e) => handleReplyChange(e)}
-              className="custom-file-upload"
-            ></input>
-          </form>
-        ) : null}
       </div>
     </div>
   );

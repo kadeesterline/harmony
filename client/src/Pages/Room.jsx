@@ -2,19 +2,21 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useUser, useUserUpdate } from "../Context/UserContext";
-import { useChannel, useChannelUpdate } from "../Context/ChannelContext";
-import { useMember, useMemberUpdate } from "../Context/MemberContext";
+import { useChannel } from "../Context/ChannelContext";
+import { useMember } from "../Context/MemberContext";
 import Message from "../Components/Message";
-import { GrAdd, GrFormAttachment } from "react-icons/gr";
+import MemberModal from "../Components/MemberModal";
+
+import { GrAdd } from "react-icons/gr";
 import { DirectUpload } from "activestorage";
 import GifPicker from "../Components/GifPicker";
 import TipTap from "../Components/TipTap";
 import GifGrid from "../Components/GifGrid";
 
 function Room() {
-  const handleSetChannel = useChannelUpdate();
+  // const handleSetChannel = useChannelUpdate();
   const currentChannel = useChannel();
-  const setCurrentChannel = useChannelUpdate();
+  // const setCurrentChannel = useChannelUpdate();
   const currentMember = useMember();
   const setCurrentUser = useUserUpdate();
 
@@ -26,15 +28,17 @@ function Room() {
   });
 
   const [channelMessages, setChannelMessages] = useState({});
+  const [showModal, setShowModal] = useState(false);
 
   let { id } = useParams();
+
+  let roomName = currentChannel?.room?.name;
 
   function handleSetUser(user) {
     setCurrentUser(user);
   }
 
   useEffect(() => {
-    // console.log(currentChannel.id);
     fetch(`/channels/${currentChannel?.id}`).then((r) => {
       if (r.ok) {
         r.json().then(setChannelMessages);
@@ -160,20 +164,36 @@ function Room() {
         ...input,
         [e.target.name]: e.target.files[0],
       }));
-    } else {
-      setChatInput({
-        [e.target.name]: e.target.value,
-      });
-    }
+    } //else {
+    //   setChatInput({
+    //     [e.target.name]: e.target.value,
+    //   });
+    // }
+  }
+
+  function handleShowModal() {
+    setShowModal(true);
   }
 
   return (
     <div className="room-div left-80 absolute h-100 grid grid-cols-1 ">
       <div
-        id="message-container"
-        className="p-10 fixed bottom-52 h-96 overflow-y-auto   "
+        onClick={handleShowModal}
+        className="fixed right-5 top-5 bg-green-1000 rounded-lg p-2 grid grid-cols-1 hover:cursor-pointer"
       >
-        <div className="border-2 border-red-700">{channelPosts}</div>
+        <div>channel: {currentChannel?.name}</div>
+        <div>room: {channelMessages?.room?.name}</div>
+      </div>
+      <div id="message-container" className=" fixed  overflow-y-auto ">
+        <div className=" px-7 pr-80 ">{channelPosts}</div>
+        {showModal ? (
+          <div>
+            <MemberModal
+              setShowModal={setShowModal}
+              roomMembers={channelMessages?.room?.room_members}
+            />
+          </div>
+        ) : null}
         <div className=" fixed right-0 bottom-52 h-96 overflow-y-auto ">
           <GifGrid
             handleSubmitGif={handleSubmitGif}
@@ -183,37 +203,37 @@ function Room() {
         </div>
       </div>
 
-      <div className=" bottom-0 right-0 fixed  bg-green-1000 chat-bar ">
+      <div className=" bottom-0 left-80 right-0 fixed  bg-green-1000 chat-bar ">
         <div className="flex ">
-          <TipTap />
+          <TipTap setInputState={setChatInput} />
 
-          <div className="grid grid-rows-2">
-            <GifPicker
-              setGifSearchResponse={setGifSearchResponse}
-              setShowGifs={setShowGifs}
-              showGifs={showGifs}
-            />
-
-            <form onSubmit={handleAddPost} className="mx-4 mt-4 ">
-              {/* <input
-            autoComplete="nope"
-            placeholder="Enter a new message"
-            type="textarea"
-            name="content"
-            value={chatInput.content}
-            onChange={(e) => handleChange(e)}
-            className="border-2  m-5 rounded-lg  h-11"
-            id="chat-input"
-          ></input> */}
-
-              <input
-                type="file"
-                name="image"
-                onChange={(e) => handleChange(e)}
-                className="custom-file-upload"
-                id="file-input"
-              ></input>
-            </form>
+          <div className="grid grid-cols-1 gap-0 justify-items-center ">
+            <div>
+              <GifPicker
+                setGifSearchResponse={setGifSearchResponse}
+                setShowGifs={setShowGifs}
+                showGifs={showGifs}
+              />
+            </div>
+            <div>
+              <form onSubmit={handleAddPost} className="mx-4  ">
+                <input
+                  type="file"
+                  name="image"
+                  onChange={(e) => handleChange(e)}
+                  className="custom-file-upload"
+                  id="file-input"
+                ></input>
+              </form>
+            </div>
+            <div className="mb-3">
+              <button
+                type="submit"
+                className="bg-green-1050 rounded-full p-3 text-2xl"
+              >
+                <GrAdd />
+              </button>
+            </div>
           </div>
         </div>
       </div>

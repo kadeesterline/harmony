@@ -30,7 +30,7 @@ c4 = Channel.create(name: 'channel 4', room_id: 2)
 c5 = Channel.create(name: 'channel 5', room_id: 3)
 c6 = Channel.create(name: 'channel 6', room_id: 4)
 
-p1 = Post.create(room_member_id: 1, channel_id: 1, content: 'test post 1')
+p1 = Post.create(room_member_id: 1, channel_id: 1, content: '<p>test post 1</p>')
 
 p1.image.attach(
     io: File.open('./public/images/download.jpeg'),
@@ -38,7 +38,7 @@ p1.image.attach(
     content_type: 'application/jpeg'
 )
 
-p2 = Post.create(room_member_id: 2, channel_id: 1, content: 'test post 2')
+p2 = Post.create(room_member_id: 2, channel_id: 1, content: '<p>test post 2</p>')
 
 p2.image.attach(
     io: File.open('./public/images/download (1).jpeg'),
@@ -46,7 +46,7 @@ p2.image.attach(
     content_type: 'application/jpeg'
 )
 
-p3 = Post.create(room_member_id: 3, channel_id: 3, content: 'test post 3')
+p3 = Post.create(room_member_id: 3, channel_id: 3, content: '<p>test post 3</p>')
 
 p3.image.attach(
     io: File.open('./public/images/download (2).jpeg'),
@@ -54,11 +54,11 @@ p3.image.attach(
     content_type: 'application/jpeg'
 )
 
-p4 = Post.create(room_member_id: 4, channel_id: 4, content: 'test post 4')
-p5 = Post.create(room_member_id: 1, channel_id: 1, content: 'test post 5')
-p6 = Post.create(room_member_id: 2, channel_id: 1, content: 'test post 6')
-p7 = Post.create(room_member_id: 3, channel_id: 3, content: 'test post 7')
-p8 = Post.create(room_member_id: 4, channel_id: 4, content: 'test post 8')
+p4 = Post.create(room_member_id: 4, channel_id: 4, content: '<p>test post 4</p>')
+p5 = Post.create(room_member_id: 1, channel_id: 1, content: '<p>test post 5</p>')
+p6 = Post.create(room_member_id: 2, channel_id: 1, content: '<p>test post 6</p>')
+p7 = Post.create(room_member_id: 3, channel_id: 3, content: '<p>test post 7</p>')
+p8 = Post.create(room_member_id: 4, channel_id: 4, content: '<p>test post 8</p>')
 
 
 re1 = Reply.create(post_id: 1, room_member_id: 1, content: 'test reply 1')
