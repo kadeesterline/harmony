@@ -229,6 +229,7 @@ function Room() {
             <div className="mb-3">
               <button
                 type="submit"
+                onClick={handleAddPost}
                 className="bg-green-1050 rounded-full p-3 text-2xl"
               >
                 <GrAdd />
