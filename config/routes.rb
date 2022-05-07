@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
-  namespace :api do
+ 
   resources :users
   resources :rooms
   resources :room_members
@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   # put '/putpicture', to: 'posts#add_picture'
 
   post 'rails/active_storage/direct_uploads', to: 'direct_uploads#create'
-  end
+  
 
   get '*path',
 	    to: 'fallback#index',
