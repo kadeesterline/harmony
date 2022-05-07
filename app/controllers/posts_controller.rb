@@ -7,7 +7,7 @@ class PostsController < ApplicationController
 
     def show
         post = find_post
-        image = rails_blob_path(post.image)
+        image = rails_service_blob_url(post.image)
         render json: {post: post, image: image}
 
     end
@@ -52,7 +52,7 @@ class PostsController < ApplicationController
     end
 
     def post_params
-        params.require(:post).permit(:room_member_id, :channel_id, :image, :content, :image_url, :gif_url)
+        params.permit(:room_member_id, :channel_id, :image, :content, :image_url, :gif_url, :post)
     end
 
 end

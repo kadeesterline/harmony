@@ -1,4 +1,4 @@
-class CreateRoomMembers < ActiveRecord::Migration[7.0]
+class CreateRoomMembers < ActiveRecord::Migration[6.1]
   def change
     create_table :room_members do |t|
       t.integer :user_id

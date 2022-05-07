@@ -99,7 +99,7 @@ function Room() {
       if (error) {
         console.log(error);
       } else {
-        console.log("blob:", blob);
+        console.log("blob signed id:", blob.signed_id);
         fetch(`http://localhost:3000/posts/${post.id}`, {
           method: "PUT",
           headers: {
