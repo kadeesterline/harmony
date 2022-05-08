@@ -26,13 +26,9 @@ function Message({ message, setChannelMessages }) {
   const currentChannel = useChannel();
 
   useEffect(() => {
-    console.log("message", message);
-    console.log(typeof message);
-    if (message) {
-      fetch(`/posts/${message?.id}`)
-        .then((r) => r.json())
-        .then((r) => console.log("useEffect", r));
-    }
+    fetch(`/posts/${message.id}`)
+      .then((r) => r.json())
+      .then((r) => setImage(r.image));
   }, [currentChannel]);
 
   function handleDeleteMessage() {
@@ -184,7 +180,9 @@ function Message({ message, setChannelMessages }) {
             handleEditMessage={handleEditMessage}
           />
 
-          <img src={`http://localhost:3000/${image}`} alt="post" />
+          {image ? (
+            <img src={`http://localhost:3000/${image}`} alt="post" />
+          ) : null}
 
           {message.gif_url ? <img src={message.gif_url} alt="gif" /> : null}
         </div>

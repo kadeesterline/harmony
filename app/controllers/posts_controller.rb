@@ -7,15 +7,14 @@ class PostsController < ApplicationController
 
     def show
         post = find_post
-        image = rails_service_blob_url(post.image)
+        image = rails_blob_path(post.image)
         render json: {post: post, image: image}
 
     end
 
     def create
         post = Post.create!(post_params)
-        post.image.attach(post_params[:image])
-        
+        # post.image.attach(post_params[:image])
         render json:  post, status: :created
     end
 
