@@ -1,4 +1,4 @@
-class CreateReplies < ActiveRecord::Migration[7.0]
+class CreateReplies < ActiveRecord::Migration[6.1]
   def change
     create_table :replies do |t|
       t.integer :post_id

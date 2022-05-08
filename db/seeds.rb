@@ -59,6 +59,14 @@ p5 = Post.create(room_member_id: 1, channel_id: 1, content: '<p>test post 5</p>'
 p6 = Post.create(room_member_id: 2, channel_id: 1, content: '<p>test post 6</p>')
 p7 = Post.create(room_member_id: 3, channel_id: 3, content: '<p>test post 7</p>')
 p8 = Post.create(room_member_id: 4, channel_id: 4, content: '<p>test post 8</p>')
+p9 = Post.create(room_member_id: 1, channel_id: 1, content: '<p>test post 9</p>')
+p10 = Post.create(room_member_id: 1, channel_id: 1, content: '<p>test post 10</p>')
+p11 = Post.create(room_member_id: 1, channel_id: 1, content: '<p>test post 11</p>')
+p12 = Post.create(room_member_id: 1, channel_id: 1, content: '<p>test post 12</p>')
+p13 = Post.create(room_member_id: 1, channel_id: 1, content: '<p>test post 13</p>')
+p14 = Post.create(room_member_id: 1, channel_id: 1, content: '<p>test post 14</p>')
+p15 = Post.create(room_member_id: 1, channel_id: 1, content: '<p>test post 15</p>')
+p16 = Post.create(room_member_id: 1, channel_id: 1, content: '<p>test post 16</p>')
 
 
 re1 = Reply.create(post_id: 1, room_member_id: 1, content: 'test reply 1')
