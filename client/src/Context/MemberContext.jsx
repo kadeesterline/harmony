@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 
 export const MemberContext = React.createContext();
 export const MemberUpdateContext = React.createContext();

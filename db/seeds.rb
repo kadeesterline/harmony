@@ -10,10 +10,10 @@ u1 = User.create(username: 'test user 1', password: '123', password_confirmation
 u2 = User.create(username: 'test user 2', email: 'test2@test.com', password: '123', password_confirmation: '123')
 
 
-r1 = Room.create(name: 'Room 1')
-r2 = Room.create(name: 'Room 2')
-r3 = Room.create(name: 'Room 3')
-r4 = Room.create(name: 'Room 4')
+r1 = Room.create(name: 'Room 1', room_code: (0..8).map { ('a'..'z').to_a[rand(26)] }.join)
+r2 = Room.create(name: 'Room 2', room_code: (0..8).map { ('a'..'z').to_a[rand(26)] }.join)
+r3 = Room.create(name: 'Room 3', room_code: (0..8).map { ('a'..'z').to_a[rand(26)] }.join)
+r4 = Room.create(name: 'Room 4', room_code: (0..8).map { ('a'..'z').to_a[rand(26)] }.join)
 
 
 rm1 = RoomMember.create(user_id: 1, room_id: 1, is_admin: true)

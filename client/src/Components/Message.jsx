@@ -4,7 +4,7 @@ import { useChannel } from "../Context/ChannelContext";
 import { useState, useEffect } from "react";
 import Reply from "./Reply";
 // import EditMessageForm from "./EditMessageForm";
-import { GrTrash, GrEdit, GrAdd, GrDown } from "react-icons/gr";
+import { GrTrash, GrAdd, GrDown } from "react-icons/gr";
 import { DirectUpload } from "activestorage";
 import TipTapMessage from "../Components/TipTapMessage";
 import TipTap from "../Components/TipTap";
@@ -16,9 +16,9 @@ function Message({ message, setChannelMessages }) {
     image: "",
   });
   const [showThread, setShowThread] = useState(false);
-  const [showEditMessage, setShowEditMessage] = useState(false);
+  // const [showEditMessage, setShowEditMessage] = useState(false);
   const [image, setImage] = useState({});
-  const [gif, setGif] = useState("");
+  // const [gif, setGif] = useState("");
   const [editMessageInput, setEditMessageInput] = useState({
     content: "",
   });
@@ -26,10 +26,10 @@ function Message({ message, setChannelMessages }) {
   const currentChannel = useChannel();
 
   useEffect(() => {
-    fetch(`/posts/${message.id}`)
+    fetch(`/posts/${message?.id}`)
       .then((r) => r.json())
       .then((r) => setImage(r.image));
-  }, [currentChannel]);
+  }, [currentChannel, message.id]);
 
   function handleDeleteMessage() {
     fetch(`/posts/${message.id}`, {
@@ -57,9 +57,9 @@ function Message({ message, setChannelMessages }) {
     setShowThread(!showThread);
   }
 
-  function toggleShowEditMessage() {
-    setShowEditMessage(!showEditMessage);
-  }
+  // function toggleShowEditMessage() {
+  //   setShowEditMessage(!showEditMessage);
+  // }
 
   function handleNewReply(e) {
     console.log(replyInput);

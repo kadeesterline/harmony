@@ -14,7 +14,7 @@ class PostsController < ApplicationController
 
     def create
         post = Post.create!(post_params)
-        # post.image.attach(post_params[:image])
+        post.image.attach(post_params[:image])
         render json:  post, status: :created
     end
 

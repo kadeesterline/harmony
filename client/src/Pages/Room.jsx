@@ -1,12 +1,9 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { useUser, useUserUpdate } from "../Context/UserContext";
 import { useChannel } from "../Context/ChannelContext";
 import { useMember } from "../Context/MemberContext";
 import Message from "../Components/Message";
 import MemberModal from "../Components/MemberModal";
-
 import { GrAdd } from "react-icons/gr";
 import { DirectUpload } from "activestorage";
 import GifPicker from "../Components/GifPicker";
@@ -18,7 +15,6 @@ function Room() {
   const currentChannel = useChannel();
   // const setCurrentChannel = useChannelUpdate();
   const currentMember = useMember();
-  const setCurrentUser = useUserUpdate();
 
   const [gifSearchResponse, setGifSearchResponse] = useState([]);
   const [showGifs, setShowGifs] = useState(false);
@@ -30,27 +26,13 @@ function Room() {
   const [channelMessages, setChannelMessages] = useState({});
   const [showModal, setShowModal] = useState(false);
 
-  let { id } = useParams();
-
-  let roomName = currentChannel?.room?.name;
-
-  function handleSetUser(user) {
-    setCurrentUser(user);
-  }
-
   useEffect(() => {
     fetch(`/channels/${currentChannel?.id}`).then((r) => {
       if (r.ok) {
         r.json().then(setChannelMessages);
       }
     });
-
-    // console.log(process.env.REACT_APP_GIPHY_KEY);
   }, [currentChannel.id]);
-
-  let navigate = useNavigate();
-
-  const currentUser = useUser();
 
   function handleAddPost(e) {
     e.preventDefault();
@@ -172,28 +154,32 @@ function Room() {
   }
 
   function handleShowModal() {
-    setShowModal(true);
+    setShowModal(!showModal);
+    console.log(currentChannel.room);
   }
 
   return (
     <div className="room-div left-80 absolute h-100 grid grid-cols-1 ">
-      <div
+      <button
         onClick={handleShowModal}
-        className="fixed right-5 top-5 bg-green-1000 rounded-lg p-2 grid grid-cols-1 hover:cursor-pointer"
+        className="fixed right-5 top-5 bg-green-1000 rounded-lg p-2 grid grid-cols-1 cursor-pointer"
       >
-        <div>channel: {currentChannel?.name}</div>
-        <div>room: {channelMessages?.room?.name}</div>
-      </div>
+        <span>channel: {currentChannel?.name}</span>
+        <span>room: {channelMessages?.room?.name}</span>
+      </button>
       <div id="message-container" className=" fixed  overflow-y-auto ">
         <div className=" px-7 pr-80 ">{channelPosts}</div>
+
         {showModal ? (
           <div>
             <MemberModal
               setShowModal={setShowModal}
               roomMembers={channelMessages?.room?.room_members}
+              setChannelMessages={setChannelMessages}
             />
           </div>
         ) : null}
+
         <div className=" fixed right-0 bottom-52 h-96 overflow-y-auto ">
           <GifGrid
             handleSubmitGif={handleSubmitGif}
