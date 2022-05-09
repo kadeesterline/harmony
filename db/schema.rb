@@ -70,12 +70,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_27_031220) do
     t.integer "user_id"
     t.integer "room_id"
     t.boolean "is_admin"
+    t.boolean "is_mod"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "rooms", force: :cascade do |t|
     t.string "name"
+    t.string "room_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
 import { useUser, useUserUpdate } from "../Context/UserContext";
-import { useNavigate } from "react-router-dom";
 
 function New() {
   const currentUser = useUser();
@@ -12,7 +11,10 @@ function New() {
     user_id: currentUser.id,
   });
 
-  let navigate = useNavigate();
+  const [joinRoomState, setJoinRoomState] = useState({
+    code: "",
+    user_id: currentUser.id,
+  });
 
   function handleSetUser(user) {
     setCurrentUser(user);
@@ -45,22 +47,51 @@ function New() {
     });
   }
 
-  function handleChange(e) {
+  function handleJoinRoom(e) {
+    e.preventDefault();
+    fetch("/room_members/join", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        user_id: currentUser.id,
+        code: joinRoomState.code,
+      }),
+    }).then((r) => {
+      if (r.ok) {
+        fetch("/autologin").then((r) => {
+          if (r.ok) {
+            r.json().then((user) => {
+              handleSetUser(user);
+            });
+          }
+        });
+      }
+    });
+  }
+
+  function handleNameChange(e) {
     const { name, value } = e.target;
     setAddRoomState((room) => ({ ...room, [name]: value }));
   }
 
+  function handleCodeChange(e) {
+    const { name, value } = e.target;
+    setJoinRoomState((room) => ({ ...room, [name]: value }));
+  }
+
   return (
     <div className="flex items-center justify-center">
-      <div className="bg-slate-200  m-5 w-1/2 h-56 rounded-2xl flex items-center justify-center">
+      <div className="bg-slate-200  m-5 w-1/2 h-56 rounded-2xl grid grid-cols-1 items-center justify-items-center">
         <form className="" autoComplete="nope" onSubmit={handleAddRoom}>
-          <label htmlFor="name"> Create a Room: </label>
+          <label htmlFor="name">Create a Room:</label>
           <input
             autoComplete="nope"
             type="text"
             name="name"
             value={addRoomState.name}
-            onChange={(e) => handleChange(e)}
+            onChange={(e) => handleNameChange(e)}
             className="border rounded-lg w-96"
           ></input>
 
@@ -70,6 +101,25 @@ function New() {
           >
             {" "}
             Create{" "}
+          </button>
+        </form>
+        Or
+        <form onSubmit={handleJoinRoom}>
+          <label htmlFor="code">Enter a Room Code:</label>
+          <input
+            autoComplete="asdf"
+            type="text"
+            name="code"
+            value={joinRoomState.code}
+            onChange={(e) => handleCodeChange(e)}
+            className="border rounded-lg w-96"
+          ></input>
+          <button
+            className="bg-green-1050 rounded-full p-3 my-2 mx-1 text-white"
+            type="submit"
+          >
+            {" "}
+            Join{" "}
           </button>
         </form>
       </div>

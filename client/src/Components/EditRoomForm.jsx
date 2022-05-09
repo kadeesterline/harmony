@@ -1,11 +1,11 @@
 import React from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { useUser, useUserUpdate } from "../Context/UserContext";
+import { useUserUpdate } from "../Context/UserContext";
 
 function EditRoomForm({ showEditRoom }) {
   let { id } = useParams();
-  const currentUser = useUser();
+
   const setCurrentUser = useUserUpdate();
   const [editRoomInput, setEditRoomInput] = useState({
     name: "",

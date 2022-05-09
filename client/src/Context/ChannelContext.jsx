@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 
 export const ChannelContext = React.createContext();
 export const ChannelUpdateContext = React.createContext();

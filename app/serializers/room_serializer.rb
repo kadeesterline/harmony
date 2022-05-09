@@ -1,5 +1,5 @@
 class RoomSerializer < ActiveModel::Serializer
-    attributes :id, :name, :channels, :room_members
+    attributes :id, :name, :room_code, :channels, :room_members
     
     
     has_many :room_members

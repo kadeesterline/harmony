@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useUser, useUserUpdate } from "../Context/UserContext";
-import { useMember, useMemberUpdate } from "../Context/MemberContext";
+import { useMember } from "../Context/MemberContext";
 
 import RoomButton from "./RoomButton";
 import AddChannelForm from "./AddChannelForm";
@@ -22,7 +22,6 @@ function SideBar() {
   const handleSetUser = useUserUpdate();
   const currentUser = useUser();
 
-  const handleSetMember = useMemberUpdate();
   const currentMember = useMember();
 
   useEffect(() => {

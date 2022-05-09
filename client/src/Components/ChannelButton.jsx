@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useChannel, useChannelUpdate } from "../Context/ChannelContext";
+import { useChannelUpdate } from "../Context/ChannelContext";
 import { useMember } from "../Context/MemberContext";
 import { useUserUpdate } from "../Context/UserContext";
 import EditChannelForm from "./EditChannelForm";
@@ -11,16 +10,14 @@ function ChannelButton({ channel }) {
   const [showEditChannel, setShowEditChannel] = useState(false);
   const [channelState, setChannelState] = useState({});
 
-  let navigate = useNavigate();
-
   const handleSetChannel = useChannelUpdate();
-  const currentChannel = useChannel();
+
   const currentMember = useMember();
   const setCurrentUser = useUserUpdate();
 
   useEffect(() => {
     setChannelState(channel);
-  }, []);
+  }, [channel]);
 
   function handleChannelButtonClick() {
     // console.log(channel.id);

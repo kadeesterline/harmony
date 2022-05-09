@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useUser, useUserUpdate } from "../Context/UserContext";
+import { useUserUpdate } from "../Context/UserContext";
 
 function SignIn() {
   const [user, setUser] = useState({
@@ -12,7 +12,6 @@ function SignIn() {
   let navigate = useNavigate();
 
   const handleSetUser = useUserUpdate();
-  const currentUser = useUser();
 
   function handleSignin(e) {
     e.preventDefault();
