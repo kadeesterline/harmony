@@ -58,7 +58,6 @@ function SideBar() {
   );
 
   function handleShowAddChannel() {
-    console.log("Current room:", currentRoom);
     setShowAddChannel(!showAddChannel);
   }
 
@@ -129,22 +128,27 @@ function SideBar() {
           <GrAdd />
         </button>
 
-        {showAddChannel ? <AddChannelForm /> : null}
+        {showAddChannel ? (
+          <AddChannelForm setShowAddChannel={setShowAddChannel} />
+        ) : null}
       </div>
 
       {currentMember.is_admin ? (
-        <div>
+        <div className="">
           <button
-            className="absolute bottom-24 text-2xl left-20 bg-green-1050 p-2 ml-24 rounded-full"
+            className="absolute bottom-32 text-2xl left-20 bg-green-1050 p-2 ml-24 rounded-full"
             onClick={toggleShowEditRoom}
           >
             <GrEdit />
           </button>
-          <EditRoomForm showEditRoom={showEditRoom} />
+          <EditRoomForm
+            showEditRoom={showEditRoom}
+            setShowEditRoom={setShowEditRoom}
+          />
         </div>
       ) : null}
 
-      <div className="w-80 h-20 shadow-md bg-green-1050 bottom-0 absolute flex justify-center items-center text-2xl  ">
+      <div className="w-80 h-20 shadow-md bg-green-1050 bottom-0 absolute flex justify-center items-center text-2xl">
         {currentUser.username}
         <button
           className="bg-green-1000 p-3  mx-5 rounded-full text-3xl"

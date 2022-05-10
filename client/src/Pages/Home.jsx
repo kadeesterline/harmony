@@ -11,15 +11,13 @@ function Home() {
             className="bg-green-1050 rounded-full p-2 my-2 mx-1 text-white"
             to="/signin"
           >
-            {" "}
-            Sign In{" "}
+            Sign In
           </Link>
           <Link
             className="bg-green-1050 rounded-full p-2 my-2 mx-1 text-white"
             to="/newuser"
           >
-            {" "}
-            Sign Up{" "}
+            Sign Up
           </Link>
         </div>
       </div>

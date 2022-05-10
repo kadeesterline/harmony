@@ -4,11 +4,4 @@ class ChannelSerializer < ActiveModel::Serializer
     belongs_to :room
     has_many :posts
     has_many :replies, through: :posts
-
-    
-
-    # def posts
-    #     object.posts.map { |p| p}
-    # end
-
 end

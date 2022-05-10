@@ -24,7 +24,6 @@ function SignIn() {
     }).then((r) => {
       if (r.ok) {
         r.json().then((user) => {
-          console.log(user);
           handleSetUser(user);
           navigate("/new");
         });

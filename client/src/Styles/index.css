@@ -13,17 +13,6 @@ body::-webkit-scrollbar {
   display: none;
 }
 
-/* #chat-input {
-  width: 50rem;
-} */
-
-#file-input {
-}
-
-/* #submit-chat {
-  margin-left: 20rem;
-} */
-
 .custom-file-upload::-webkit-file-upload-button {
   visibility: hidden;
 }
@@ -47,10 +36,6 @@ body::-webkit-scrollbar {
 .container {
   column-count: 3;
   column-gap: 0.25em;
-
-  /* display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: masonry; */
 }
 
 .item {
@@ -62,7 +47,7 @@ body::-webkit-scrollbar {
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #000;
-  width: 75%;
+  width: 100%;
 }
 
 .menu-bar {
@@ -79,12 +64,9 @@ body::-webkit-scrollbar {
 
 .ProseMirror {
   padding: 10px;
-  border-top: 2px solid #000;
   background: white;
   border-radius: 0 0 5px 5px;
   min-height: 100px;
-  max-height: 200px;
-  width: 100%;
 }
 .ProseMirror > * + * {
   margin-top: 0.75em;
@@ -135,7 +117,6 @@ body::-webkit-scrollbar {
 }
 
 .chat-bar {
-  /* min-width: 80%; */
 }
 
 #message-container {

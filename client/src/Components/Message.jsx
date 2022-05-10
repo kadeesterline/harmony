@@ -4,7 +4,7 @@ import { useChannel } from "../Context/ChannelContext";
 import { useState, useEffect } from "react";
 import Reply from "./Reply";
 // import EditMessageForm from "./EditMessageForm";
-import { GrTrash, GrAdd, GrDown } from "react-icons/gr";
+import { GrTrash, GrAdd, GrDown, GrEdit } from "react-icons/gr";
 import { DirectUpload } from "activestorage";
 import TipTapMessage from "../Components/TipTapMessage";
 import TipTap from "../Components/TipTap";
@@ -22,6 +22,9 @@ function Message({ message, setChannelMessages }) {
   const [editMessageInput, setEditMessageInput] = useState({
     content: "",
   });
+
+  const [editable, setEditable] = useState(false);
+
   const currentMember = useMember();
   const currentChannel = useChannel();
 
@@ -57,12 +60,7 @@ function Message({ message, setChannelMessages }) {
     setShowThread(!showThread);
   }
 
-  // function toggleShowEditMessage() {
-  //   setShowEditMessage(!showEditMessage);
-  // }
-
   function handleNewReply(e) {
-    console.log(replyInput);
     e.preventDefault();
 
     //create object to send
@@ -89,13 +87,6 @@ function Message({ message, setChannelMessages }) {
           }
         });
       }
-      // if (r.ok) {
-      //   fetch(`/channels/${currentChannel?.id}`).then((r) => {
-      //     if (r.ok) {
-      //       r.json().then(setChannelMessages);
-      //     }
-      //   });
-      // }
     });
   }
 
@@ -108,7 +99,6 @@ function Message({ message, setChannelMessages }) {
       if (error) {
         console.log(error);
       } else {
-        console.log("blob", blob);
         fetch(`http://localhost:3000/replies/${reply.id}`, {
           method: "PUT",
           headers: {
@@ -178,6 +168,8 @@ function Message({ message, setChannelMessages }) {
             message={message}
             setEditMessageInput={setEditMessageInput}
             handleEditMessage={handleEditMessage}
+            editable={editable}
+            setEditabel={setEditable}
           />
 
           {image ? (
@@ -202,46 +194,70 @@ function Message({ message, setChannelMessages }) {
         {showReply ? (
           <div className="col-span-1">
             <TipTap setInputState={setReplyInput} />
-            <form autoComplete="nope" onSubmit={handleNewReply}>
-              <input
-                type="file"
-                name="image"
-                onChange={(e) => handleReplyChange(e)}
-                className="custom-file-upload"
-              ></input>
-            </form>
-            <button className="mx-3 p-2" onClick={handleNewReply}>
-              {" "}
-              Submit Reply{" "}
-            </button>
+            <div className="flex flex-rows-1 items-center">
+              <div>
+                <form autoComplete="nope" onSubmit={handleNewReply}>
+                  <input
+                    type="file"
+                    name="image"
+                    onChange={(e) => handleReplyChange(e)}
+                    className="custom-file-upload"
+                  ></input>
+                </form>
+              </div>
+              <div>
+                <button
+                  className="mx-3 p-2 bg-green-1050 rounded-full text-2xl"
+                  onClick={handleNewReply}
+                >
+                  <GrAdd />
+                </button>
+              </div>
+            </div>
           </div>
         ) : null}
       </div>
 
       {/* This is the button group on the side that should stay on the side  */}
-      <div>
+      <div className="col-span-1 grid grid-rows-3">
         {currentMember.id === message.room_member_id ? (
-          <div>
+          <div className="row-span-2 grid grid-rows-2">
             <button
               className=" m-2  float-right rounded-full "
               onClick={handleDeleteMessage}
             >
               <GrTrash />
             </button>
+            <button
+              className="m-2"
+              type="button"
+              onClick={(event) => setEditable(!editable)}
+            >
+              <GrEdit />
+            </button>
           </div>
         ) : null}
-        <button
-          className=" m-2   float-right rounded-full "
-          onClick={toggleShowThread}
-        >
-          <GrDown />
-        </button>
-        <button
-          className=" m-2  float-right rounded-full "
-          onClick={handleShowReply}
-        >
-          <GrAdd />
-        </button>
+        <div className="row-span-1">
+          <button
+            className=" m-2   float-right rounded-full "
+            onClick={toggleShowThread}
+          >
+            <GrDown />
+          </button>
+        </div>
+        <div>
+          <span className="bg-green-1050 p-1 rounded-full text-white text-xs relative left-5 bottom-10">
+            {message.replies.length}
+          </span>
+        </div>
+        <div className="row-span-1">
+          <button
+            className=" m-2  float-right rounded-full "
+            onClick={handleShowReply}
+          >
+            <GrAdd />
+          </button>
+        </div>
       </div>
     </div>
   );

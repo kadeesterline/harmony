@@ -89,11 +89,6 @@ function Reply({ reply, setChannelMessages }) {
             >
               <GrEdit />
             </button>
-            {/* <EditReplyForm
-              showEditReply={showEditReply}
-              reply={reply}
-              setChannelMessages={setChannelMessages}
-            /> */}
           </div>
         ) : null}
       </div>

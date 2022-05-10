@@ -1,10 +1,8 @@
 class RoomSerializer < ActiveModel::Serializer
     attributes :id, :name, :room_code, :channels, :room_members
     
-    
     has_many :room_members
     has_many :channels
-    # has_many :posts, through: :channels
     
     def channels
         object.channels.map { |c| c}

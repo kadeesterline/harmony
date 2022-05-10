@@ -41,11 +41,6 @@ function MemberModal({ setShowModal, roomMembers, setChannelMessages }) {
     )
   );
 
-  // function handleInvite(e) {
-  //   e.preventDefault();
-  //   console.log(currentChannel);
-  // }
-
   function handleModChange(event, member) {
     member.is_mod
       ? handleRemoveMod(event, member)
@@ -113,27 +108,6 @@ function MemberModal({ setShowModal, roomMembers, setChannelMessages }) {
             <div className="p-5">
               <h3 className="text-xl">Room Code: {room?.room_code}</h3>
             </div>
-            {/* <div className="p-3">
-              <h3 className="text-xl">Invite a new member</h3>
-              <form onSubmit={handleInvite}>
-                <label htmlFor="email" className="">
-                  {" "}
-                  Email:{" "}
-                </label>
-                <input
-                  autoComplete="never"
-                  type="text"
-                  name="email"
-                  className="border rounded-lg"
-                ></input>
-                <button
-                  className="bg-green-1050 p-2 m-2 rounded-full"
-                  type="submit"
-                >
-                  Invite
-                </button>
-              </form>
-            </div> */}
           </div>
         </div>
       </div>

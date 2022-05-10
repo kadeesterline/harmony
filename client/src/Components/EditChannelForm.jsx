@@ -1,7 +1,12 @@
 import React from "react";
 import { useState } from "react";
 
-function EditChannelForm({ channel, showEditChannel, setChannelState }) {
+function EditChannelForm({
+  channel,
+  showEditChannel,
+  setShowEditChannel,
+  setChannelState,
+}) {
   const [editChannelInput, setEditChannelInput] = useState({
     name: "",
   });
@@ -17,6 +22,10 @@ function EditChannelForm({ channel, showEditChannel, setChannelState }) {
     }).then((r) => {
       if (r.ok) {
         r.json().then(setChannelState);
+        setShowEditChannel(false);
+        setEditChannelInput({
+          name: "",
+        });
       }
     });
   }
@@ -28,7 +37,7 @@ function EditChannelForm({ channel, showEditChannel, setChannelState }) {
   return (
     <div>
       {showEditChannel ? (
-        <div className="w-100">
+        <div className="w-100 absolute left-22 ml-16 ">
           <form onSubmit={handleEditChannel}>
             <input
               autoComplete="nope"
@@ -37,7 +46,7 @@ function EditChannelForm({ channel, showEditChannel, setChannelState }) {
               name="name"
               value={editChannelInput.name}
               onChange={(e) => handleChange(e)}
-              className="border-2 rounded-lg"
+              className="border-2 border-slate-400 p-1 rounded-lg"
             ></input>
           </form>
         </div>

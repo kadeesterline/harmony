@@ -8,8 +8,7 @@ class PostsController < ApplicationController
     def show
         post = find_post
         image = rails_blob_path(post.image)
-        render json: {post: post, image: image}
-
+        render json: {post: post, image: image}, include: %W[room_member]
     end
 
     def create
@@ -29,14 +28,6 @@ class PostsController < ApplicationController
             render json: post
         end
     end
-
-    # def add_picture
-    #     post = find_post
-    #     post.update(picture: params[:picture])
-    #     picture_url = rails_blob_path(post.picure)
-    #     byebug
-    #     render json:  { post: post, picture_url: picture_url}
-    # end
 
     def destroy
         post = find_post
