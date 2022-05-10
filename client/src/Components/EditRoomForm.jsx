@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useUserUpdate } from "../Context/UserContext";
 
-function EditRoomForm({ showEditRoom }) {
+function EditRoomForm({ showEditRoom, setShowEditRoom }) {
   let { id } = useParams();
 
   const setCurrentUser = useUserUpdate();
@@ -25,6 +25,10 @@ function EditRoomForm({ showEditRoom }) {
           if (r.ok) {
             r.json().then((user) => {
               handleSetUser(user);
+              setEditRoomInput({
+                name: "",
+              });
+              setShowEditRoom(false);
             });
           }
         });
@@ -42,7 +46,7 @@ function EditRoomForm({ showEditRoom }) {
   }
 
   return (
-    <div className="absolute bottom-20 left-52">
+    <div className="absolute bottom-20 mb-2 left-28">
       {showEditRoom ? (
         <form onSubmit={handleEditRoom}>
           <input
@@ -52,7 +56,7 @@ function EditRoomForm({ showEditRoom }) {
             name="name"
             value={editRoomInput.name}
             onChange={(e) => handleChange(e)}
-            className="border-2 rounded-lg"
+            className="border-2 border-slate-400 p-1 rounded-lg"
           ></input>
         </form>
       ) : null}

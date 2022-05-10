@@ -34,8 +34,4 @@ class RoomMembersController < ApplicationController
         RoomMember.find_by!(id: params[:id])
     end
 
-    # def find_room
-    #     Room.find_by!(room_code: params:)
-    # end
-
 end

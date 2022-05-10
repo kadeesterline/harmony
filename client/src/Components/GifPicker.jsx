@@ -20,12 +20,12 @@ function GifPicker({ setGifSearchResponse, setShowGifs, showGifs }) {
     setShowGifs(true);
     fetch(giphySearchUrl)
       .then((r) => r.json())
-      .then((r) => setGifSearchResponse(r.data));
-    //   .then((r) => setImgPath(r.data[0].images.preview_gif.url));
+      .then((r) => setGifSearchResponse(r.data))(setGifSearch({ gif: "" }));
   }
 
   function hideGifs() {
     setShowGifs(false);
+    setGifSearch({ gif: "" });
   }
 
   return (

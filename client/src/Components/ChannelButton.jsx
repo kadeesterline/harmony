@@ -20,7 +20,6 @@ function ChannelButton({ channel }) {
   }, [channel]);
 
   function handleChannelButtonClick() {
-    // console.log(channel.id);
     handleSetChannel(channel);
   }
   function handleSetUser(user) {
@@ -28,7 +27,6 @@ function ChannelButton({ channel }) {
   }
 
   function handleDeleteChannel() {
-    console.log(channelState.id);
     fetch(`/channels/${channel.id}`, {
       method: "DELETE",
       headers: {
@@ -76,6 +74,7 @@ function ChannelButton({ channel }) {
             <EditChannelForm
               channel={channel}
               showEditChannel={showEditChannel}
+              setShowEditChannel={setShowEditChannel}
               setChannelState={setChannelState}
             />
           </div>

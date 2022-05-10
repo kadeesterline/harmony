@@ -22,7 +22,6 @@ function New() {
 
   function handleAddRoom(e) {
     e.preventDefault();
-    console.log(currentUser.id);
     fetch("/rooms", {
       method: "POST",
       headers: {
@@ -41,8 +40,6 @@ function New() {
             });
           }
         });
-        // r.json().then(setCurrentUser.rooms);
-        // .then(navigate(`/boards/${r.id}`));
       }
     });
   }
@@ -99,8 +96,7 @@ function New() {
             className="bg-green-1050 rounded-full p-3 my-2 mx-1 text-white"
             type="submit"
           >
-            {" "}
-            Create{" "}
+            Create
           </button>
         </form>
         Or
@@ -118,13 +114,10 @@ function New() {
             className="bg-green-1050 rounded-full p-3 my-2 mx-1 text-white"
             type="submit"
           >
-            {" "}
-            Join{" "}
+            Join
           </button>
         </form>
       </div>
-
-      {/* <form></form> */}
     </div>
   );
 }

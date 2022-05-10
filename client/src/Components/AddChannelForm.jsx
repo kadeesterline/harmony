@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useUserUpdate } from "../Context/UserContext";
 
-function AddChannelForm() {
+function AddChannelForm({ setShowAddChannel }) {
   let { id } = useParams();
   const setCurrentUser = useUserUpdate();
 
@@ -18,7 +18,7 @@ function AddChannelForm() {
 
   function handleAddChannel(e) {
     e.preventDefault();
-    console.log(channelFormInput);
+
     fetch("/channels", {
       method: "POST",
       headers: {
@@ -32,6 +32,11 @@ function AddChannelForm() {
             r.json().then((user) => {
               handleSetUser(user);
             });
+            setChannelFormInput({
+              channel_name: "",
+              room_id: parseInt(id),
+            });
+            setShowAddChannel(false);
           }
         });
       }
@@ -44,7 +49,7 @@ function AddChannelForm() {
   }
 
   return (
-    <div className="absolute  left-56">
+    <div className="absolute  left-56 top-16 mt-2">
       <form onSubmit={handleAddChannel}>
         <input
           autoComplete="none"
@@ -53,7 +58,7 @@ function AddChannelForm() {
           name="name"
           value={channelFormInput.channel_name}
           onChange={(e) => handleChange(e)}
-          className="border-2 rounded-lg"
+          className="border-2 border-slate-400 rounded-lg p-1"
         ></input>
       </form>
     </div>

@@ -36,8 +36,6 @@ function Room() {
 
   function handleAddPost(e) {
     e.preventDefault();
-    // console.log("chatInput content:", chatInput.content);
-    // console.log("chatInput image:", chatInput.image);
 
     let post = {
       content: chatInput.content,
@@ -57,18 +55,16 @@ function Room() {
       } else {
         fetch(`/channels/${currentChannel?.id}`).then((r) => {
           if (r.ok) {
-            r.json().then(setChannelMessages);
+            r.json().then(
+              setChannelMessages,
+              setChatInput({
+                content: "",
+                image: {},
+              })
+            );
           }
         });
       }
-
-      //   // fetch(`/channels/${currentChannel?.id}`).then((r) => {
-      //   //   if (r.ok) {
-      //   //     r.json().then("response", console.log);
-      //   //   }
-      //   // })
-      // );
-      //}
     });
   }
 
@@ -81,7 +77,6 @@ function Room() {
       if (error) {
         console.log(error);
       } else {
-        console.log("blob signed id:", blob.signed_id);
         fetch(`http://localhost:3000/posts/${post.id}`, {
           method: "PUT",
           headers: {
@@ -109,7 +104,6 @@ function Room() {
       channel_id: currentChannel?.id,
       room_member_id: currentMember?.id,
     };
-    console.log(post);
     fetch("/posts", {
       method: "POST",
       headers: {
@@ -135,27 +129,17 @@ function Room() {
     </div>
   ));
 
-  // function handleChange(e) {
-  //   const { name, value } = e.target;
-  //   setChatInput((input) => ({ ...input, [name]: value }));
-  // }
-
   function handleChange(e) {
     if (e.target.name === "image") {
       setChatInput((input) => ({
         ...input,
         [e.target.name]: e.target.files[0],
       }));
-    } //else {
-    //   setChatInput({
-    //     [e.target.name]: e.target.value,
-    //   });
-    // }
+    }
   }
 
   function handleShowModal() {
     setShowModal(!showModal);
-    console.log(currentChannel.room);
   }
 
   return (
@@ -189,7 +173,7 @@ function Room() {
         </div>
       </div>
 
-      <div className=" bottom-0 left-80 right-0 fixed  bg-green-1000 chat-bar ">
+      <div className=" bottom-0 left-80 right-0 fixed  bg-green-1000 chat-bar">
         <div className="flex ">
           <TipTap setInputState={setChatInput} />
 
@@ -202,7 +186,7 @@ function Room() {
               />
             </div>
             <div>
-              <form onSubmit={handleAddPost} className="mx-4  ">
+              <form onSubmit={handleAddPost} className="ml-10  ">
                 <input
                   type="file"
                   name="image"

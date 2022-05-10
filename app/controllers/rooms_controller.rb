@@ -11,18 +11,14 @@ class RoomsController < ApplicationController
     end
 
     def create
-        
         room = Room.create!(room_params)
         room.update(room_code: (0..8).map { ('a'..'z').to_a[rand(26)] }.join )
         # room.room_code = 
         room_member = RoomMember.create!(
-            
                             user_id: params[:user_id],
                             room_id: room.id,
                             is_admin: true,
                         )
-                        
-        
         render json: room, status: :created
     end
 
