@@ -18,8 +18,8 @@ const TipTapMenuBar = ({ editor }) => {
   }
 
   return (
-    <div className="menu-bar">
-      <div>
+    <div className="menu-bar bg-slate-400 rounded-t-lg">
+      <div className="">
         <button
           onClick={() => editor.chain().focus().toggleBold().run()}
           className={editor.isActive("bold") ? "is-active" : ""}
@@ -94,7 +94,7 @@ const TipTapMenuBar = ({ editor }) => {
           <FaQuoteLeft />
         </button>
       </div>
-      <div>
+      <div className="">
         <button onClick={() => editor.chain().focus().undo().run()}>
           <FaUndo />
         </button>

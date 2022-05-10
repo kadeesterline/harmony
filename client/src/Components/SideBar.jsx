@@ -97,13 +97,13 @@ function SideBar() {
   }
 
   return (
-    <div className="w-80 h-full shadow-md bg-green-950 fixed left-0">
-      <div className="w-20 h-full shadow-md bg-green-1000 absolute">
+    <div className="w-80 h-full shadow-md bg-slate-500 fixed left-0 border-r border-slate-700">
+      <div className="w-20 h-full shadow-md bg-slate-700 absolute">
         {roomButtons}
         <div className="mt-4">
           {currentMember.is_admin ? (
             <button
-              className="m-auto w-16 h-16 rounded-full bg-green-1050 text-2xl flex justify-center items-center"
+              className="m-auto w-16 h-16 rounded-full bg-slate-300 text-2xl flex justify-center items-center"
               onClick={handleDeleteRoom}
             >
               <GrTrash />
@@ -111,7 +111,7 @@ function SideBar() {
           ) : null}
           <Link
             to="/new"
-            className="m-auto w-16 h-16 mt-4 rounded-full bg-green-1050 text-2xl flex justify-center items-center"
+            className="m-auto w-16 h-16 mt-4 rounded-full bg-slate-300 text-2xl flex justify-center items-center"
           >
             <GrAdd />
           </Link>
@@ -123,7 +123,7 @@ function SideBar() {
         {channelList}
         <button
           onClick={handleShowAddChannel}
-          className="absolute text-2xl bg-green-1050 mt-4 ml-44 p-2 rounded-full"
+          className="absolute text-2xl bg-slate-300 mt-4 ml-44 p-2 rounded-full"
         >
           <GrAdd />
         </button>
@@ -136,7 +136,7 @@ function SideBar() {
       {currentMember.is_admin ? (
         <div className="">
           <button
-            className="absolute bottom-32 text-2xl left-20 bg-green-1050 p-2 ml-24 rounded-full"
+            className="absolute bottom-32 text-2xl left-20 bg-slate-300 p-2 ml-24 rounded-full"
             onClick={toggleShowEditRoom}
           >
             <GrEdit />
@@ -148,10 +148,10 @@ function SideBar() {
         </div>
       ) : null}
 
-      <div className="w-80 h-20 shadow-md bg-green-1050 bottom-0 absolute flex justify-center items-center text-2xl">
+      <div className="w-80 h-20 shadow-md bg-slate-600 bottom-0 absolute flex justify-center items-center text-2xl text-white">
         {currentUser.username}
         <button
-          className="bg-green-1000 p-3  mx-5 rounded-full text-3xl"
+          className="bg-slate-300 p-3  mx-5 rounded-full text-3xl text-black"
           onClick={handleSignOut}
         >
           <GoSignOut />

@@ -93,13 +93,13 @@ function New() {
           ></input>
 
           <button
-            className="bg-green-1050 rounded-full p-3 my-2 mx-1 text-white"
+            className="bg-slate-500 rounded-full p-3 my-2 mx-1 text-white"
             type="submit"
           >
             Create
           </button>
         </form>
-        Or
+
         <form onSubmit={handleJoinRoom}>
           <label htmlFor="code">Enter a Room Code:</label>
           <input
@@ -111,7 +111,7 @@ function New() {
             className="border rounded-lg w-96"
           ></input>
           <button
-            className="bg-green-1050 rounded-full p-3 my-2 mx-1 text-white"
+            className="bg-slate-500 rounded-full p-3 my-2 mx-1 text-white"
             type="submit"
           >
             Join

@@ -146,7 +146,7 @@ function Room() {
     <div className="room-div left-80 absolute h-100 grid grid-cols-1 ">
       <button
         onClick={handleShowModal}
-        className="fixed right-5 top-5 bg-green-1000 rounded-lg p-2 grid grid-cols-1 cursor-pointer"
+        className="fixed right-5 top-5 bg-slate-400 rounded-lg p-2 grid grid-cols-1 cursor-pointer"
       >
         <span>channel: {currentChannel?.name}</span>
         <span>room: {channelMessages?.room?.name}</span>
@@ -173,7 +173,7 @@ function Room() {
         </div>
       </div>
 
-      <div className=" bottom-0 left-80 right-0 fixed  bg-green-1000 chat-bar">
+      <div className=" bottom-0 left-80 right-0 fixed  bg-slate-500 chat-bar">
         <div className="flex ">
           <TipTap setInputState={setChatInput} />
 
@@ -200,7 +200,7 @@ function Room() {
               <button
                 type="submit"
                 onClick={handleAddPost}
-                className="bg-green-1050 rounded-full p-3 text-2xl"
+                className="bg-slate-300 rounded-full p-3 text-2xl"
               >
                 <GrAdd />
               </button>

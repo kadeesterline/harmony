@@ -31,16 +31,17 @@ function GifPicker({ setGifSearchResponse, setShowGifs, showGifs }) {
   return (
     <div className="  overflow-y-auto">
       <div className=" bg-white "></div>
-      <div className=" mx-4 bg-green-1000 flex items-center">
-        <form onSubmit={searchGif} className=" ">
-          <label className="mx-2 p-2"> Choose a GIF </label>
+      <div className=" mx-4 bg-slate-5-- ">
+        <form onSubmit={searchGif} className="relative ">
+          {/* <label className="mx-2 p-2"> Choose a GIF </label> */}
           <input
             autoComplete="off"
+            placeholder="Choose a GIF"
             type="text"
             name="gif"
             value={gifSearch.gif}
             onChange={(e) => handleGifInputChange(e)}
-            className="border rounded-lg mx-2 mt-2 p-2"
+            className="border rounded-lg mx-2 mt-2 p-2 w-64"
           ></input>
         </form>
         {showGifs ? (
