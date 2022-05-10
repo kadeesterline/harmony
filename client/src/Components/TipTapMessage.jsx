@@ -48,7 +48,7 @@ const TipTapMessage = ({
             <div>
               <TipTapMenuBar editor={editor} />
               <button
-                className="m-3 p-2 text-xl bg-green-1050 rounded-full"
+                className="m-3 p-2 text-xl bg-slate-300 rounded-full"
                 onClick={submitEdit}
               >
                 <GrAdd />

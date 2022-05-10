@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { GrEdit } from "react-icons/gr";
+import { GrEdit, GrAdd } from "react-icons/gr";
 import TipTapMenuBar from "../Components/TipTapMenuBar";
 import { useMember } from "../Context/MemberContext";
 
-const TipTapReply = ({ reply, setEditReplyInput, handleEditReply }) => {
-  const [editable, setEditable] = useState(false);
+const TipTapReply = ({
+  reply,
+  setEditReplyInput,
+  handleEditReply,
+  editable,
+  setEditable,
+}) => {
   const currentMember = useMember();
   const editor = useEditor({
     editable,
@@ -40,20 +45,15 @@ const TipTapReply = ({ reply, setEditReplyInput, handleEditReply }) => {
     <>
       {currentMember.id === reply?.room_member_id ? (
         <div>
-          <button
-            className="mx-3 p-2"
-            type="button"
-            onClick={(event) => setEditable(!editable)}
-          >
-            <GrEdit />
-          </button>
           {editable ? (
             <div>
-              <button className="mx-3 p-2" onClick={submitEdit}>
-                {" "}
-                Submit Edit{" "}
-              </button>
               <TipTapMenuBar editor={editor} />
+              <button
+                className="m-3 p-2 text-xl bg-slate-300 rounded-full"
+                onClick={submitEdit}
+              >
+                <GrAdd />
+              </button>
             </div>
           ) : null}
         </div>

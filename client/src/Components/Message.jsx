@@ -160,7 +160,7 @@ function Message({ message, setChannelMessages }) {
   ));
 
   return (
-    <div className=" flex grid-cols-2 gap-4 items-start w-100 bg-green-1100 border-2 rounded-xl mb-7 p-8">
+    <div className=" flex grid-cols-2 gap-4 items-start w-100 bg-slate-300 border-2 rounded-xl mb-7 p-5">
       <div className="grid grid-cols-1">
         {/* This is the actual message content */}
         <div className="bg-white p-5 w-96 col-span-1 rounded-lg border ">
@@ -173,17 +173,23 @@ function Message({ message, setChannelMessages }) {
           />
 
           {image ? (
-            <img src={`http://localhost:3000/${image}`} alt="post" />
+            <img
+              src={`http://localhost:3000/${image}`}
+              alt="post"
+              className="w-96"
+            />
           ) : null}
 
-          {message.gif_url ? <img src={message.gif_url} alt="gif" /> : null}
+          {message.gif_url ? (
+            <img src={message.gif_url} alt="gif" className="w-96" />
+          ) : null}
         </div>
 
         {/* This is the replies */}
         <div
           className={
             showThread
-              ? "grid-rows-1 col-span-1  bg-green-1000 p-2 m-2 rounded-lg"
+              ? "grid-rows-1 col-span-1  bg-slate-400 p-2 m-2 rounded-lg"
               : "p-2 grid-rows-1 col-span-2  "
           }
         >
@@ -207,7 +213,7 @@ function Message({ message, setChannelMessages }) {
               </div>
               <div>
                 <button
-                  className="mx-3 p-2 bg-green-1050 rounded-full text-2xl"
+                  className="mx-3 p-2 bg-slate-500 rounded-full text-2xl"
                   onClick={handleNewReply}
                 >
                   <GrAdd />
@@ -246,7 +252,7 @@ function Message({ message, setChannelMessages }) {
           </button>
         </div>
         <div>
-          <span className="bg-green-1050 p-1 rounded-full text-white text-xs relative left-5 bottom-10">
+          <span className="bg-grey-1050 p-1 rounded-full text-white text-xs relative left-5 bottom-10">
             {message.replies.length}
           </span>
         </div>

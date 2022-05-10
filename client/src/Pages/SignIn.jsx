@@ -37,8 +37,8 @@ function SignIn() {
   }
 
   return (
-    <div className="bg-green-950 h-screen grid place-content-center">
-      <div className="border shadow-lg shadow-green-1050 rounded-lg bg-white w-96 h-48 grid place-content-center">
+    <div className="bg-slate-400 h-screen grid place-content-center">
+      <div className="border shadow-lg shadow-slate-800 rounded-lg bg-white w-96 h-48 grid place-content-center">
         <h1 className="font-bold text-2xl m-2"> Sign in to Harmony! </h1>
         <form autoComplete="nope" onSubmit={handleSignin}>
           <label htmlFor="username" className="mt-2">
@@ -68,7 +68,7 @@ function SignIn() {
           ></input>
           <br />
           <button
-            className="bg-green-1050 float-right rounded-full p-3 my-2 mx-1 text-white"
+            className="bg-slate-500 float-right rounded-full p-3 my-2 mx-1 text-white"
             type="submit"
           >
             {" "}

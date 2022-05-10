@@ -14,6 +14,7 @@ function Reply({ reply, setChannelMessages }) {
   const [editReplyInput, setEditReplyInput] = useState({
     content: "",
   });
+  const [editable, setEditable] = useState(false);
 
   useEffect(() => {
     fetch(`/replies/${reply.id}`)
@@ -64,28 +65,29 @@ function Reply({ reply, setChannelMessages }) {
 
   return (
     <div className="col-span-1 ">
-      <div className="bg-slate-200 p-5 w-96 h-100 m-2 rounded-lg">
+      <div className="bg-white p-5 w-96 h-100 m-2 rounded-lg">
         <div className="mb-5">
           <TipTapReply
             reply={reply}
             setEditReplyInput={setEditReplyInput}
             handleEditReply={handleEditReply}
+            editable={editable}
+            setEditable={setEditable}
           />
         </div>
         {image ? (
           <img src={`http://localhost:3000/${image}`} alt="reply" />
         ) : null}
         {currentMember.id === reply.room_member_id ? (
-          <div className="mb-5">
-            <button
-              className=" mb-4 mx-3 float-right "
-              onClick={handleDeleteReply}
-            >
+          <div className="relative left-5 bottom-10 mb-5 grid grid-cols-1 float-right">
+            <button className=" mb-4 mx-3  " onClick={handleDeleteReply}>
               <GrTrash />
             </button>
+
             <button
-              className=" mb-4 mx-3 float-right"
-              onClick={toggleShowEditReply}
+              className="mx-3 "
+              type="button"
+              onClick={(event) => setEditable(!editable)}
             >
               <GrEdit />
             </button>

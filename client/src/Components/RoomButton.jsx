@@ -34,7 +34,7 @@ function RoomButton({ name, id, handleChangeRoom }) {
   return (
     <button
       onClick={handleRoomButtonClick}
-      className="m-auto mt-4 w-16 h-16 rounded-full bg-green-1050 flex justify-center items-center "
+      className="m-auto mt-4 w-16 h-16 rounded-full bg-slate-300 flex justify-center items-center "
     >
       {firstLetters}
     </button>

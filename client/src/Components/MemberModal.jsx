@@ -31,7 +31,7 @@ function MemberModal({ setShowModal, roomMembers, setChannelMessages }) {
         {member?.user?.username}
         {currentMember.is_admin ? (
           <button
-            className="bg-green-950 rounded-full p-1 m-2"
+            className="bg-slate-200 rounded-full p-1 m-2"
             onClick={(event) => handleModChange(event, member)}
           >
             {member.is_mod ? "Remove Mod" : "Make Moderator"}
@@ -92,13 +92,13 @@ function MemberModal({ setShowModal, roomMembers, setChannelMessages }) {
           {/* content */}
           <div className="border rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
             {/* header */}
-            <div className="flex items-start justify-between p-5 bg-green-950 rounded-t-lg">
+            <div className="flex items-start justify-between p-5 bg-slate-400 rounded-t-lg">
               <h2 className="text-black float-left text-3xl font-bold">
                 Members
               </h2>
               <button
                 onClick={handleHideModal}
-                className="className='p-1 ml-auto bg-transparent border-0 text-black opacity-40 float-right text-3xl leading-none font-semibold outline-none focus:outline-none'"
+                className="className='p-1 ml-auto bg-transparent border-0 text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none'"
               >
                 <FiX />
               </button>

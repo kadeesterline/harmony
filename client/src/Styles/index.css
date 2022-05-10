@@ -46,7 +46,7 @@ body::-webkit-scrollbar {
   margin: 0;
   padding: 10px;
   border-radius: 5px;
-  border: 1px solid #000;
+
   width: 100%;
 }
 
