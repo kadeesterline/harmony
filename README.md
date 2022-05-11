@@ -7,16 +7,16 @@ Harmony's home page.<br />
 ![harmony home page](./readme-photos/Screen Shot 2022-05-11 at 2.01.02 PM.png)
 
 After signing in or creating an account you can join either create a room or enter a room code from an existing room.<br />
-![Create/Join page](./readme-photos/Screen%Shot%2022-05-11%at%2.02.05%PM.png)
+![Create/Join page](./readme-photos/Screen Shot 2022-05-11 at 2.02.05 PM.png)
 
 After joining a room users can view messages in different channels.<br />
-![Room view](./readme-photos/Screen%Shot%2022-05-11%at%2.02.45%PM.png)
+![Room view](./readme-photos/Screen Shot 2022-05-11 at 2.02.45 PM.png)
 
 By searching for a gif users can send gifs. To see replies users can click the down arrow symbol on a message<br />
-![Replies/Gif view](./readme-photos/Screen%Shot%2022-05-11%at%2.03.15%PM.png)
+![Replies/Gif view](./readme-photos/Screen Shot 2022-05-11 at 2.03.15 PM.png)
 
 To add a new reply users can click the plus symbol on a message. As admin of a room you can add moderators through the member modal by clicking on the channel/room display in the corner. The member modal also has the rooms join code that could be given to other users to join a room.<br />
-![Reply/Modal view](./readme-photos/Screen%Shot%2022-05-11%at%2.03.43%PM.png)
+![Reply/Modal view](./readme-photos/Screen Shot 2022-05-11 at 2.03.43 PM.png)
 
 ## Running project locally
 After cloning down the repo from within the directory of the project you can run the following commands to view the project:
