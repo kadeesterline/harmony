@@ -4,6 +4,7 @@ import StarterKit from "@tiptap/starter-kit";
 import { GrAdd } from "react-icons/gr";
 import { useMember } from "../Context/MemberContext";
 import TipTapMenuBar from "./TipTapMenuBar";
+import Underline from "@tiptap/extension-underline";
 
 const TipTapMessage = ({
   message,
@@ -21,7 +22,7 @@ const TipTapMessage = ({
       const html = editor.getHTML();
       setEditMessageInput({ content: html });
     },
-    extensions: [StarterKit],
+    extensions: [StarterKit, Underline],
   });
 
   useEffect(() => {
@@ -47,18 +48,20 @@ const TipTapMessage = ({
           {editable ? (
             <div>
               <TipTapMenuBar editor={editor} />
-              <button
-                className="m-3 p-2 text-xl bg-slate-300 rounded-full"
-                onClick={submitEdit}
-              >
-                <GrAdd />
-              </button>
             </div>
           ) : null}
         </div>
       ) : null}
 
       <EditorContent editor={editor} />
+      {editable ? (
+        <button
+          className="m-3 p-2 text-xl bg-slate-300 rounded-full float-right"
+          onClick={submitEdit}
+        >
+          <GrAdd />
+        </button>
+      ) : null}
     </>
   );
 };

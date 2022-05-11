@@ -31,8 +31,8 @@ function GifPicker({ setGifSearchResponse, setShowGifs, showGifs }) {
   return (
     <div className="  overflow-y-auto">
       <div className=" bg-white "></div>
-      <div className=" mx-4 bg-slate-5-- ">
-        <form onSubmit={searchGif} className="relative ">
+      <div className=" mx-4 flex flex-rows-1 ">
+        <form onSubmit={searchGif} className="relative  ">
           {/* <label className="mx-2 p-2"> Choose a GIF </label> */}
           <input
             autoComplete="off"
@@ -41,11 +41,11 @@ function GifPicker({ setGifSearchResponse, setShowGifs, showGifs }) {
             name="gif"
             value={gifSearch.gif}
             onChange={(e) => handleGifInputChange(e)}
-            className="border rounded-lg mx-2 mt-2 p-2 w-64"
+            className="border rounded-lg mx-2 mt-2 p-2 w-52"
           ></input>
         </form>
         {showGifs ? (
-          <button className="text-xl float-right " onClick={hideGifs}>
+          <button className="text-xl float-right mx-2" onClick={hideGifs}>
             <GrClose />
           </button>
         ) : null}

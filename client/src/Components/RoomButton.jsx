@@ -21,7 +21,7 @@ function RoomButton({ name, id, handleChangeRoom }) {
   function handleRoomButtonClick() {
     navigate(`/room/${id}`);
     handleChangeRoom(id);
-    handleSetChannel(0);
+    handleSetChannel({});
     findMember();
   }
 

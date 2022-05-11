@@ -4,6 +4,7 @@ import StarterKit from "@tiptap/starter-kit";
 import { GrEdit, GrAdd } from "react-icons/gr";
 import TipTapMenuBar from "../Components/TipTapMenuBar";
 import { useMember } from "../Context/MemberContext";
+import Underline from "@tiptap/extension-underline";
 
 const TipTapReply = ({
   reply,
@@ -22,7 +23,7 @@ const TipTapReply = ({
       const html = editor.getHTML();
       setEditReplyInput({ content: html });
     },
-    extensions: [StarterKit],
+    extensions: [StarterKit, Underline],
   });
 
   useEffect(() => {
@@ -48,17 +49,20 @@ const TipTapReply = ({
           {editable ? (
             <div>
               <TipTapMenuBar editor={editor} />
-              <button
-                className="m-3 p-2 text-xl bg-slate-300 rounded-full"
-                onClick={submitEdit}
-              >
-                <GrAdd />
-              </button>
             </div>
           ) : null}
         </div>
       ) : null}
       <EditorContent editor={editor} />
+
+      {editable ? (
+        <button
+          className="m-3 p-2 text-xl bg-slate-300 rounded-full left-72 bottom-5 relative"
+          onClick={submitEdit}
+        >
+          <GrAdd />
+        </button>
+      ) : null}
     </>
   );
 };

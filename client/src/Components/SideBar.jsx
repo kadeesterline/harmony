@@ -121,12 +121,14 @@ function SideBar() {
       <div className="">
         {currentRoom?.name}
         {channelList}
-        <button
-          onClick={handleShowAddChannel}
-          className="absolute text-2xl bg-slate-300 mt-4 ml-44 p-2 rounded-full"
-        >
-          <GrAdd />
-        </button>
+        {currentMember.is_admin ? (
+          <button
+            onClick={handleShowAddChannel}
+            className="absolute text-2xl bg-slate-300 mt-4 ml-44 p-2 rounded-full"
+          >
+            <GrAdd />
+          </button>
+        ) : null}
 
         {showAddChannel ? (
           <AddChannelForm setShowAddChannel={setShowAddChannel} />

@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useUserUpdate } from "../Context/UserContext";
 
 function SignIn() {
@@ -74,6 +74,13 @@ function SignIn() {
             {" "}
             Sign in{" "}
           </button>
+          <Link
+            className="bg-slate-500 rounded-full p-3 my-2 mx-1 text-white float-left"
+            to="/newuser"
+          >
+            {" "}
+            Sign Up{" "}
+          </Link>
         </form>
       </div>
     </div>

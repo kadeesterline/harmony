@@ -34,7 +34,7 @@ body::-webkit-scrollbar {
 }
 
 .container {
-  column-count: 3;
+  column-count: 2;
   column-gap: 0.25em;
 }
 
@@ -52,7 +52,9 @@ body::-webkit-scrollbar {
 
 .menu-bar {
   margin: 0;
-  padding-bottom: 5px;
+  padding-bottom: 2px;
+  padding-top: 2px;
+  padding-left: 2px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -116,12 +118,16 @@ body::-webkit-scrollbar {
   margin: 2rem 0;
 }
 
+.ProseMirror:focus {
+  outline: none;
+}
+
 .chat-bar {
 }
 
 #message-container {
-  padding-top: 10px;
-  height: 48rem;
+  padding-top: 1.75rem;
+  height: 48.75rem;
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
