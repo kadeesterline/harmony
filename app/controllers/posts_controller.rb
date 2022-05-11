@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
     skip_before_action :authorize, only: :update
+    # before_action :set_s3_direct_post, only: [:new, :edit, :create, :update]
 
     def index
         render json: Post.all, status: :ok
@@ -43,6 +44,10 @@ class PostsController < ApplicationController
 
     def post_params
         params.permit(:room_member_id, :channel_id, :image, :content, :image_url, :gif_url, :post)
+    end
+
+    def set_s3_direct_post
+        @s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read')
     end
 
 end

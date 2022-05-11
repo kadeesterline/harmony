@@ -11,7 +11,7 @@ function GifGrid({ showGifs, gifSearchResponse, handleSubmitGif }) {
   ));
 
   return (
-    <div className="w-96  ">
+    <div className="w-100 ">
       {showGifs ? <div className="container">{gifs}</div> : null}
     </div>
   );

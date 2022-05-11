@@ -22,35 +22,55 @@ const TipTapMenuBar = ({ editor }) => {
       <div className="">
         <button
           onClick={() => editor.chain().focus().toggleBold().run()}
-          className={editor.isActive("bold") ? "is-active" : ""}
+          className={
+            editor.isActive("bold")
+              ? "is-active  bg-slate-300 rounded-lg hover:bg-white m-1"
+              : "rounded-lg hover:bg-white m-1"
+          }
         >
           <FaBold />
         </button>
 
         <button
           onClick={() => editor.chain().focus().toggleItalic().run()}
-          className={editor.isActive("italic") ? "is-active" : ""}
+          className={
+            editor.isActive("italic")
+              ? "is-active  bg-slate-300 rounded-lg m-1"
+              : "rounded-lg hover:bg-white m-1"
+          }
         >
           <FaItalic />
         </button>
 
         <button
           onClick={() => editor.chain().focus().toggleStrike().run()}
-          className={editor.isActive("strike") ? "is-active" : ""}
+          className={
+            editor.isActive("strike")
+              ? "is-active bg-slate-300 rounded-lg m-1"
+              : "rounded-lg hover:bg-white m-1"
+          }
         >
           <FaStrikethrough />
         </button>
 
         <button
           onClick={() => editor.chain().focus().toggleUnderline().run()}
-          className={editor.isActive("underline") ? "is-active" : ""}
+          className={
+            editor.isActive("underline")
+              ? "is-active  bg-slate-300 rounded-lg m-1"
+              : "rounded-lg hover:bg-white m-1"
+          }
         >
           <FaUnderline />
         </button>
 
         <button
           onClick={() => editor.chain().focus().toggleCode().run()}
-          className={editor.isActive("code") ? "is-active" : ""}
+          className={
+            editor.isActive("code")
+              ? "is-active  bg-slate-300 rounded-lg m-1"
+              : "rounded-lg hover:bg-white m-1"
+          }
         >
           <BsCode />
         </button>
@@ -60,7 +80,9 @@ const TipTapMenuBar = ({ editor }) => {
             editor.chain().focus().toggleHeading({ level: 1 }).run()
           }
           className={
-            editor.isActive("heading", { level: 1 }) ? "is-active" : ""
+            editor.isActive("heading", { level: 1 })
+              ? "is-active bg-slate-300 rounded-lg m-1"
+              : "rounded-lg hover:bg-white m-1"
           }
         >
           <FaHeading />
@@ -68,28 +90,44 @@ const TipTapMenuBar = ({ editor }) => {
 
         <button
           onClick={() => editor.chain().focus().toggleBulletList().run()}
-          className={editor.isActive("bulletList") ? "is-active" : ""}
+          className={
+            editor.isActive("bulletList")
+              ? "is-active  bg-slate-300 rounded-lg m-1"
+              : "rounded-lg hover:bg-white m-1"
+          }
         >
           <FaListUl />
         </button>
 
         <button
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
-          className={editor.isActive("orderedList") ? "is-active" : ""}
+          className={
+            editor.isActive("orderedList")
+              ? "is-active  bg-slate-300 rounded-lg m-1"
+              : "rounded-lg hover:bg-white m-1"
+          }
         >
           <FaListOl />
         </button>
 
         <button
           onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-          className={editor.isActive("codeBlock") ? "is-active" : ""}
+          className={
+            editor.isActive("codeBlock")
+              ? "is-active  bg-slate-300 rounded-lg m-1"
+              : "rounded-lg hover:bg-white m-1"
+          }
         >
           <BsCodeSquare />
         </button>
 
         <button
           onClick={() => editor.chain().focus().toggleBlockquote().run()}
-          className={editor.isActive("blockquote") ? "is-active" : ""}
+          className={
+            editor.isActive("blockquote")
+              ? "is-active  bg-slate-300 rounded-lg m-1"
+              : "rounded-lg hover:bg-white m-1"
+          }
         >
           <FaQuoteLeft />
         </button>

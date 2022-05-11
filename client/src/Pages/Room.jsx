@@ -9,6 +9,7 @@ import { DirectUpload } from "activestorage";
 import GifPicker from "../Components/GifPicker";
 import TipTap from "../Components/TipTap";
 import GifGrid from "../Components/GifGrid";
+import { Editor } from "@tiptap/react";
 
 function Room() {
   // const handleSetChannel = useChannelUpdate();
@@ -151,7 +152,7 @@ function Room() {
         <span>channel: {currentChannel?.name}</span>
         <span>room: {channelMessages?.room?.name}</span>
       </button>
-      <div id="message-container" className=" fixed  overflow-y-auto ">
+      <div id="message-container" className=" fixed  overflow-y-auto">
         <div className=" px-7 pr-80 ">{channelPosts}</div>
 
         {showModal ? (
@@ -164,7 +165,7 @@ function Room() {
           </div>
         ) : null}
 
-        <div className=" fixed right-0 bottom-52 h-96 overflow-y-auto ">
+        <div className=" fixed right-0 bottom-48 h-96 overflow-y-auto ">
           <GifGrid
             handleSubmitGif={handleSubmitGif}
             gifSearchResponse={gifSearchResponse}
