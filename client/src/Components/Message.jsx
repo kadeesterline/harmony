@@ -164,13 +164,15 @@ function Message({ message, setChannelMessages }) {
       <div className="grid grid-cols-1">
         {/* This is the actual message content */}
         <div className="bg-white p-5 w-96 col-span-1 rounded-lg border ">
-          <TipTapMessage
-            message={message}
-            setEditMessageInput={setEditMessageInput}
-            handleEditMessage={handleEditMessage}
-            editable={editable}
-            setEditabel={setEditable}
-          />
+          {message.content || editable ? (
+            <TipTapMessage
+              message={message}
+              setEditMessageInput={setEditMessageInput}
+              handleEditMessage={handleEditMessage}
+              editable={editable}
+              setEditabel={setEditable}
+            />
+          ) : null}
 
           {image ? (
             <img
@@ -186,15 +188,17 @@ function Message({ message, setChannelMessages }) {
         </div>
 
         {/* This is the replies */}
-        <div
-          className={
-            showThread
-              ? "grid-rows-1 col-span-1  bg-slate-400 p-2 m-2 rounded-lg"
-              : "p-2 grid-rows-1 col-span-2  "
-          }
-        >
-          {showThread ? replies : null}
-        </div>
+        {message.replies.length > 0 ? (
+          <div
+            className={
+              showThread
+                ? "grid-rows-1 col-span-1  bg-slate-400 p-2 m-2 rounded-lg"
+                : "p-2 grid-rows-1 col-span-2  "
+            }
+          >
+            {showThread ? replies : null}
+          </div>
+        ) : null}
 
         {/* This is the reply tiptap */}
         {showReply ? (
@@ -226,23 +230,6 @@ function Message({ message, setChannelMessages }) {
 
       {/* This is the button group on the side that should stay on the side  */}
       <div className="col-span-1 grid grid-rows-3">
-        {currentMember.id === message.room_member_id ? (
-          <div className="row-span-2 grid grid-rows-2">
-            <button
-              className=" m-2  float-right rounded-full "
-              onClick={handleDeleteMessage}
-            >
-              <GrTrash />
-            </button>
-            <button
-              className="m-2"
-              type="button"
-              onClick={(event) => setEditable(!editable)}
-            >
-              <GrEdit />
-            </button>
-          </div>
-        ) : null}
         <div className="row-span-1">
           <button
             className=" m-2   float-right rounded-full "
@@ -250,12 +237,13 @@ function Message({ message, setChannelMessages }) {
           >
             <GrDown />
           </button>
+          <div>
+            <span className="bg-grey-1050 p-1 rounded-full text-white text-xs relative left-5 bottom-10">
+              {message.replies.length}
+            </span>
+          </div>
         </div>
-        <div>
-          <span className="bg-grey-1050 p-1 rounded-full text-white text-xs relative left-5 bottom-10">
-            {message.replies.length}
-          </span>
-        </div>
+
         <div className="row-span-1">
           <button
             className=" m-2  float-right rounded-full "
@@ -263,6 +251,28 @@ function Message({ message, setChannelMessages }) {
           >
             <GrAdd />
           </button>
+        </div>
+        <div className="row-span-1">
+          {currentMember.id === message.room_member_id ||
+          currentMember.is_admin ? (
+            <button
+              className=" m-2  float-right rounded-full "
+              onClick={handleDeleteMessage}
+            >
+              <GrTrash />
+            </button>
+          ) : null}
+        </div>
+        <div className="row-span-1">
+          {currentMember.id === message.room_member_id ? (
+            <button
+              className="m-2"
+              type="button"
+              onClick={(event) => setEditable(!editable)}
+            >
+              <GrEdit />
+            </button>
+          ) : null}
         </div>
       </div>
     </div>
