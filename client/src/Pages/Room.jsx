@@ -59,7 +59,7 @@ function Room() {
             r.json().then(
               setChannelMessages,
               setChatInput({
-                content: "",
+                content: "<p></p>",
                 image: {},
               })
             );
