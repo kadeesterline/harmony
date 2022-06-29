@@ -12,7 +12,7 @@ class RoomsController < ApplicationController
 
     def create
         room = Room.create!(room_params)
-        room.update(room_code: (0..8).map { ('a'..'z').to_a[rand(26)] }.join )
+        room.room_code = (0..8).map { ('a'..'z').to_a[rand(26)] }.join 
         room_member = RoomMember.create!(
                             user_id: params[:user_id],
                             room_id: room.id,
