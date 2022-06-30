@@ -4,7 +4,6 @@ class CreateRoomMembers < ActiveRecord::Migration[6.1]
       t.integer :user_id
       t.integer :room_id
       t.boolean :is_admin
-      t.boolean :is_mod
 
       t.timestamps
     end
