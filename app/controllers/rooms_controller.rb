@@ -12,7 +12,7 @@ class RoomsController < ApplicationController
 
     def create
         room = Room.create!(room_params)
-        room.room_code = (0..8).map { ('a'..'z').to_a[rand(26)] }.join 
+        room.room_code =  gen_room_code
         room_member = RoomMember.create!(
                             user_id: params[:user_id],
                             room_id: room.id,
@@ -40,6 +40,10 @@ class RoomsController < ApplicationController
     end
 
     private
+
+    def gen_room_code
+        (0..8).map { ('a'..'z').to_a[rand(26)] }.join
+    end
     
     def find_room
         Room.find(params[:id])
