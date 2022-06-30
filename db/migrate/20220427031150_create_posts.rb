@@ -4,7 +4,7 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       t.integer :room_member_id
       t.integer :channel_id
       t.string :content
-      t.string :gif_url
+      
 
       t.timestamps
     end
